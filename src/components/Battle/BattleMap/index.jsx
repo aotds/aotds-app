@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useDrag } from 'react-use-gesture'
+import { useDrag, useWheel } from 'react-use-gesture'
 
 import classNames from 'classnames';
 
@@ -16,25 +16,31 @@ const RadarBox = ({ zonebox = '' }) => {
         height: x[3]
       };
 
-    return <rec className={ styles.zonebox } { ...dimensions } />
+    return <rect className={ styles.zonebox } { ...dimensions } />
 };
 
 export default function BattleMap({
     radar,
     zonebox,
     bogeys,
-    viewBox,
+    viewbox,
     onSelectBogey = () => true,
     onClickMap = () => true,
     onDragMap = () => true,
+    onZoomMap = () => true,
 }) {
 
 
     const drag_bind = useDrag(({down,delta,movement}) => {
+        console.log({down,delta});
         if(down) return onDragMap(delta);
         if( movement[0] === 0 && movement[0] === 0 ) return onClickMap();
     }
     );
+
+    const wheel_bind = useWheel( ({ delta: [x,y] } ) => {
+        onZoomMap(y);
+    });
 
     console.log(drag_bind());
 
@@ -42,8 +48,9 @@ export default function BattleMap({
   return <svg className={
       radar ? styles.radar : styles.mainMap
   }
-        viewBox={viewBox}
+        viewBox={viewbox}
         {...drag_bind()}
+        {...wheel_bind()}
         >
         { radar && <RadarBox zonebox={zonebox} /> }
 
