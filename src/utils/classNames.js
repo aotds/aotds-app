@@ -1,4 +1,4 @@
-import classNames as cn from 'classnames';
+import cn from 'classnames';
 
 export default function classNames(...args) {
     return { className: cn(...args) };
