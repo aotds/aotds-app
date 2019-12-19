@@ -3,10 +3,10 @@ import u from 'updeep';
 
 import { action } from '@storybook/addon-actions';
 import { withKnobs, text, boolean, number } from '@storybook/addon-knobs';
-import BattleMap from './index';
+import BattleMapPanZoom from './BattleMapPanZoom';
 
 export default {
-  title: 'BattleMap',
+  title: 'BattleMapPanZoom',
   decorators: [withKnobs]
 };
 
@@ -16,17 +16,9 @@ const bogeys = [
 ];
 
 export const basic = () => {
-  const radar = boolean('radar', false);
   return (
-    <div style={{ height: '600px' }}>
-      <BattleMap
-        bogeys={bogeys}
-        radar={radar}
-        viewBox="-150 -150 600 600"
-        onSelectBogey={action('select_bogey')}
-        onClickMap={action('click_map')}
-        onDragMap={action('drag_map')}
-      />
+    <div style={{ height: '800px' }}>
+      <BattleMapPanZoom bogeys={bogeys} />
     </div>
   );
 };

@@ -1,0 +1,15 @@
+.radar {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  bottom: 120px;
+  left: 20px;
+}
+
+.wrapper {
+  height: 800px;
+}
+
+.wrapper svg {
+  height: 100%;
+}
