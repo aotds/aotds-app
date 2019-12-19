@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import { useDrop } from 'react-dnd';
+import classNames from 'classnames';
 
 import Weapon from './Weapon';
+import './styles.css';
 
 const Targets = ({targets,target_id}) => <div className="firecon_target">
       <select>
@@ -11,11 +15,29 @@ const Targets = ({targets,target_id}) => <div className="firecon_target">
       </select>
     </div>;
 
-export default function Firecon({ firecon_id, targets = [], target_id, weapons=[] }) {
+export default function Firecon({ firecon_id, targets = [], target_id, weapons=[],
+    onWeaponAssignment = () => {}
+}) {
     const firecon_name = firecon_id >= 1 ? `Firecon ${firecon_id}` : 'Standby';
     const is_standby = firecon_id === undefined;
 
-    return <div>
+    const [ hovered, setHovered ] = useState(false);
+
+const collect = (monitor) => {
+  return {
+    hovered: monitor.isOver(),
+  }
+};
+
+    const [ collectedProps, drop ] = useDrop({
+        accept: 'weapon',
+        collect,
+        drop(item) {
+            onWeaponAssignment({ weapon_id: item.id, firecon_id });
+        },
+    });
+
+    return <div ref={drop} className={ classNames([ "Firecon", { hovered: collectedProps.hovered } ])}>
         <h2>{ firecon_name }</h2>
 
         { !is_standby && <Targets targets={targets} target_id={target_id} /> }

@@ -1,7 +1,16 @@
 import React from 'react';
 
+import { useDrag } from 'react-dnd';
+
 export default function Weapon({weapon}) {
-return <div>
+    const [ collectedProps, drag ] = useDrag({
+        item: {
+            type: 'weapon',
+            id: weapon.id,
+        }
+    });
+
+return <div ref={drag}>
       { weapon.type } { weapon.class }
 </div>;
 }

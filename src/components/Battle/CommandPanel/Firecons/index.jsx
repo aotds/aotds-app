@@ -1,4 +1,8 @@
 import React from 'react';
+
+import { DndProvider } from 'react-dnd';
+import Backend from 'react-dnd-html5-backend';
+
 import Firecon from "./Firecon";
 
 
@@ -8,6 +12,7 @@ const weapons_for = (id) => weapons.filter(({ firecon_id }) => firecon_id === id
     return <fieldset>
         <legend>firecons</legend>
 
+        <DndProvider backend={Backend}>
         { firecons.map( f => <Firecon key={f.id}
             firecon_id={f.id}
             weapons={weapons_for(f.id)}
@@ -17,6 +22,7 @@ const weapons_for = (id) => weapons.filter(({ firecon_id }) => firecon_id === id
         }
 
         <Firecon weapons={weapons_for(undefined)} />
+    </DndProvider>
 
     </fieldset>
 }
