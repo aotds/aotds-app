@@ -1,53 +1,61 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import { useDrop } from 'react-dnd';
-import classNames from 'classnames';
+import {useDrop} from 'react-dnd';
 
 import Weapon from './Weapon';
+import classNames from '../../../../utils/classNames';
 import './styles.css';
 
-const Targets = ({targets,target_id}) => <div className="firecon_target">
-      <select>
-        <option value="">no target</option>
-    { targets.map(  target => <option value={target.id} key={target.id}
-        >{ target.name }</option>
-    )}
-      </select>
-    </div>;
+const Targets = ({targets, target_id}) => (
+  <div className="firecon_target">
+    <select>
+      <option value="">no target</option>
+      {targets.map(target => (
+        <option value={target.id} key={target.id}>
+          {target.name}
+        </option>
+      ))}
+    </select>
+  </div>
+);
 
-export default function Firecon({ firecon_id, targets = [], target_id, weapons=[],
-    onWeaponAssignment = () => {}
+const collect = monitor => ({
+  hovered: monitor.isOver(),
+});
+
+export default function Firecon({
+  firecon_id,
+  targets = [],
+  target_id,
+  weapons = [],
+  onWeaponAssignment = () => {},
 }) {
-    const firecon_name = firecon_id >= 1 ? `Firecon ${firecon_id}` : 'Standby';
-    const is_standby = firecon_id === undefined;
+  const firecon_name = firecon_id >= 1 ? `Firecon ${firecon_id}` : 'Standby';
+  const is_standby = firecon_id === undefined;
 
-    const [ hovered, setHovered ] = useState(false);
+  const [collectedProps, drop] = useDrop({
+    accept: 'weapon',
+    collect,
+    drop(item) {
+      onWeaponAssignment({weapon_id: item.id, firecon_id});
+    },
+  });
 
-const collect = (monitor) => {
-  return {
-    hovered: monitor.isOver(),
-  }
-};
+  return (
+    <div
+      ref={drop}
+      {...classNames(['Firecon', {hovered: collectedProps.hovered}])}>
+      <h2>{firecon_name}</h2>
 
-    const [ collectedProps, drop ] = useDrop({
-        accept: 'weapon',
-        collect,
-        drop(item) {
-            onWeaponAssignment({ weapon_id: item.id, firecon_id });
-        },
-    });
+      {!is_standby && <Targets targets={targets} target_id={target_id} />}
 
-    return <div ref={drop} className={ classNames([ "Firecon", { hovered: collectedProps.hovered } ])}>
-        <h2>{ firecon_name }</h2>
-
-        { !is_standby && <Targets targets={targets} target_id={target_id} /> }
-
-        <div className="weapons">
-        { weapons.map( weapon =>
-            <Weapon weapon={weapon} key={weapon.id} />
-        )}
-        </div>
-    </div>;
+      <div className="weapons">
+        {weapons.map(weapon => (
+          <Weapon weapon={weapon} key={weapon.id} />
+        ))}
+      </div>
+    </div>
+  );
 }
 
 /*
