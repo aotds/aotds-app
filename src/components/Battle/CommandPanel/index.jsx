@@ -2,12 +2,16 @@ import React from 'react';
 import Structure from "./Structure";
 import fp from 'lodash/fp';
 
+import Navigation from "./Navigation";
+import Firecons from "./Firecons";
+
 const Todo = () => <div>Todo</div>;
 
-export default function CommandPanel({bogey}) {
+export default function CommandPanel({bogey,bogeys}) {
 
     const orders_sent = fp.getOr(false,'orders.issued',bogey);
-    const send_orders = () => { console.log("sending orders") };
+    const send_orders = () => { console.log("TODO") };
+    const orders_change = () => { console.log("TODO") };
 
     return <div>
     <h1>{ bogey.name || bogey.id }</h1>
@@ -20,25 +24,27 @@ export default function CommandPanel({bogey}) {
             onClick={send_orders}
         />
 
+    <Navigation
+      drive={ bogey.drive }
+      orders={ bogey.orders.navigation }
+      navigation={bogey.navigation}
+      onOrdersChange={orders_change}
+    />
+
+    <Firecons bogey_id={bogey.id} { ...bogey.weaponry }
+        targets={bogeys.filter( ({id}) => id !== bogey.id ) } />
+
         </div>;
 }
 /*
 <template>
 
-    <Navigation
-      :drive="bogey.drive"
-      :orders="order_nav"
-      :navigation="bogey.navigation"
-        @orders_change="orders_change"
-    />
 
     <Firecons :bogey_id="bogey.id" v-bind="weaponry" />
   </div>
 </template>
 
 <script>
-import Firecons from "./Firecons";
-import Navigation from "./Navigation";
 
 import fp from "lodash/fp";
 import { useBattle } from '../../../hooks/battle';

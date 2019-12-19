@@ -1,3 +1,34 @@
+import React from 'react';
+
+import Weapon from './Weapon';
+
+const Targets = ({targets,target_id}) => <div className="firecon_target">
+      <select>
+        <option value="">no target</option>
+    { targets.map(  target => <option value={target.id} key={target.id}
+        >{ target.name }</option>
+    )}
+      </select>
+    </div>;
+
+export default function Firecon({ firecon_id, targets = [], target_id, weapons=[] }) {
+    const firecon_name = firecon_id >= 1 ? `Firecon ${firecon_id}` : 'Standby';
+    const is_standby = firecon_id === undefined;
+
+    return <div>
+        <h2>{ firecon_name }</h2>
+
+        { !is_standby && <Targets targets={targets} target_id={target_id} /> }
+
+        <div className="weapons">
+        { weapons.map( weapon =>
+            <Weapon weapon={weapon} key={weapon.id} />
+        )}
+        </div>
+    </div>;
+}
+
+/*
 <template>
   <Drop
     drop-effect="move"
@@ -19,23 +50,12 @@
       </select>
     </div>
 
-    <div class="weapons">
-      <Weapon
-        v-for="weapon in weapons"
-        :bogey_id="bogey_id"
-        :weapon="weapon"
-        :key="weapon.id"
-      />
-    </div>
   </Drop>
 </template>
 
 <script>
 import { Drop } from "vue-drag-drop";
 
-/**
- * @displayName Firecon
- */
 export default {
   props: {
     firecon_id: { required: false, type: Number },
@@ -93,3 +113,4 @@ export default {
   background-color: pink;
 }
 </style>
+    */

@@ -1,3 +1,13 @@
+import React from 'react';
+
+export default function Weapon({weapon}) {
+return <div>
+      { weapon.type } { weapon.class }
+</div>;
+}
+
+
+/*
 <template>
   <Drag
     effect-allowed="move"
@@ -11,7 +21,6 @@
       @mouseenter="mouseenter"
       @mouseleave="mouseleave"
     >
-      {{ weapon.type }} {{ weapon.class }}
     </div>
   </Drag>
 </template>
@@ -47,3 +56,5 @@ export default {
   color: gray;
 }
 </style>
+
+*/

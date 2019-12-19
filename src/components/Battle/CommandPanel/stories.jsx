@@ -24,6 +24,9 @@ const bogey = {
             thrust: [ 0, 3],
             bank: [ -1, 1 ],
             turn: [ -1, 1 ],
+        },
+        course: {
+            thrust_used: 2,
         }
     },
     structure: {
@@ -43,4 +46,10 @@ const bogey = {
     },
 };
 
-export const basic = () => <CommandPanel bogey={ bogey } />;
+const bogeys = [
+    { id: 'enkidu', name: 'Enkidu' },
+    { id: 'siduri', name: 'Siduri' },
+    { id: 'gilgamesh', name: 'Gilgamesh' },
+]
+
+export const basic = () => <CommandPanel bogey={ bogey } bogeys={bogeys} />;
