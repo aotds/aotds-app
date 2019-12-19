@@ -9,16 +9,15 @@ const weapons = [ {
     type: "beam",
 }];
 
-const targets = [ 
+const targets = [
 { id: "siduri", name: "Siduri" },
-{ id: "gilgamesh", name: "Gilgamesh" } 
+{ id: "gilgamesh", name: "Gilgamesh" }
 ];
 const firecon_id = 1;
 
-<Firecon 
+<Firecon
     :firecon_id="firecon_id" bogey_id="enkidu" :weapons="weapons"
     :targets="targets"
     />
 
 ```
-

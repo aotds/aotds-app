@@ -1,4 +1,3 @@
-
 ```js
 const weapons = [ {
     id: 1,
@@ -11,12 +10,12 @@ const weapons = [ {
     type: "beam",
 }];
 
-const targets = [ 
+const targets = [
 { id: "siduri", name: "Siduri" },
-{ id: "gilgamesh", name: "Gilgamesh" } 
+{ id: "gilgamesh", name: "Gilgamesh" }
 ];
 
-const firecons = [ 
+const firecons = [
  { id: 1 },
  { id: 2 },
 ];
@@ -29,4 +28,3 @@ const firecons = [
 />
 
 ```
-
