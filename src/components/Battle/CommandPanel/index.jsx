@@ -1,40 +1,48 @@
 import React from 'react';
-import Structure from "./Structure";
+import Structure from './Structure';
 import fp from 'lodash/fp';
 
-import Navigation from "./Navigation";
-import Firecons from "./Firecons";
+import Navigation from './Navigation';
+import Firecons from './Firecons';
 
 const Todo = () => <div>Todo</div>;
 
-export default function CommandPanel({bogey,bogeys}) {
+export default function CommandPanel({ bogey, bogeys }) {
+  const orders_sent = fp.getOr(false, 'orders.issued', bogey);
+  const send_orders = () => {
+    console.log('TODO');
+  };
+  const orders_change = () => {
+    console.log('TODO');
+  };
 
-    const orders_sent = fp.getOr(false,'orders.issued',bogey);
-    const send_orders = () => { console.log("TODO") };
-    const orders_change = () => { console.log("TODO") };
+  return (
+    <div>
+      <h1>{bogey.name || bogey.id}</h1>
 
-    return <div>
-    <h1>{ bogey.name || bogey.id }</h1>
+      <Structure {...bogey.structure} />
 
-        <Structure {...bogey.structure} />
+      <input
+        type="button"
+        value={orders_sent ? 'orders sent' : 'send orders'}
+        disabled={orders_sent}
+        onClick={send_orders}
+      />
 
-        <input type="button"
-            value={ orders_sent ? "orders sent" : "send orders" }
-                disabled={ orders_sent}
-            onClick={send_orders}
-        />
+      <Navigation
+        drive={bogey.drive}
+        orders={bogey.orders.navigation}
+        navigation={bogey.navigation}
+        onOrdersChange={orders_change}
+      />
 
-    <Navigation
-      drive={ bogey.drive }
-      orders={ bogey.orders.navigation }
-      navigation={bogey.navigation}
-      onOrdersChange={orders_change}
-    />
-
-    <Firecons bogey_id={bogey.id} { ...bogey.weaponry }
-        targets={bogeys.filter( ({id}) => id !== bogey.id ) } />
-
-        </div>;
+      <Firecons
+        bogey_id={bogey.id}
+        {...bogey.weaponry}
+        targets={bogeys.filter(({ id }) => id !== bogey.id)}
+      />
+    </div>
+  );
 }
 /*
 <template>

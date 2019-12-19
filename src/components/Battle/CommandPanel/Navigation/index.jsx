@@ -8,7 +8,7 @@ export default function Navigation({
   drive,
   orders,
   navigation,
-  onOrdersChange = () => {},
+  onOrdersChange = () => {}
 }) {
   return (
     <fieldset>
@@ -29,7 +29,7 @@ export default function Navigation({
             max={maneuvers[1]}
             value={orders[type]}
             label={type}
-            onChange={value => onOrdersChange({[type]: value})}
+            onChange={value => onOrdersChange({ [type]: value })}
           />
         ))}
     </fieldset>

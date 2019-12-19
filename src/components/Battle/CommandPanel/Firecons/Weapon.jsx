@@ -2,19 +2,20 @@ import React from 'react';
 
 import { useDrag } from 'react-dnd';
 
-export default function Weapon({weapon}) {
-    const [ collectedProps, drag ] = useDrag({
-        item: {
-            type: 'weapon',
-            id: weapon.id,
-        }
-    });
+export default function Weapon({ weapon }) {
+  const [collectedProps, drag] = useDrag({
+    item: {
+      type: 'weapon',
+      id: weapon.id
+    }
+  });
 
-return <div ref={drag}>
-      { weapon.type } { weapon.class }
-</div>;
+  return (
+    <div ref={drag}>
+      {weapon.type} {weapon.class}
+    </div>
+  );
 }
-
 
 /*
 <template>

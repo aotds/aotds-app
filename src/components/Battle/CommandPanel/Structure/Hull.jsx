@@ -1,7 +1,11 @@
 import React from 'react';
 
-export default function Hull({ current, rating  }) {
-  return <div>hull: { current }/{ rating }</div>
+export default function Hull({ current, rating }) {
+  return (
+    <div>
+      hull: {current}/{rating}
+    </div>
+  );
 }
 
 /*

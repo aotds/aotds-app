@@ -1,6 +1,12 @@
 import React from 'react';
 
-export default function NavItem({min, max, label, value, onChange = () => {}}) {
+export default function NavItem({
+  min,
+  max,
+  label,
+  value,
+  onChange = () => {}
+}) {
   return (
     <div>
       <label>{label}</label>
