@@ -8,7 +8,7 @@ import Firecon from './Firecon';
 export default function Firecons({
   bogey_id,
   firecons,
-  weapons,
+  weapons = [],
   targets = []
 }) {
   const weapons_for = id =>

@@ -4,6 +4,10 @@ import fp from 'lodash/fp';
 import { coords2map } from './BattleMap/utils';
 import { addV } from 'react-use-gesture';
 
+import { useDispatch } from 'react-redux';
+
+import battle_store from '../../store/battle';
+
 import styles from './BattleMapPanZoom.module.css';
 
 export default function BattleMapPanZoom({ bogeys }) {
@@ -62,7 +66,6 @@ export default function BattleMapPanZoom({ bogeys }) {
 
   useEffect(() => {
     if (!center) return;
-    console.log('zoom: ', zoom);
     set_viewbox(
       [
         center[0] - fp.round((zoom * map_area.width) / 2),
@@ -72,10 +75,6 @@ export default function BattleMapPanZoom({ bogeys }) {
       ].join(' ')
     );
   }, [center, map_area, zoom]);
-
-  useEffect(() => {
-    console.log(viewbox);
-  }, [viewbox]);
 
   const drag_map = e => {
     set_center(
@@ -87,6 +86,12 @@ export default function BattleMapPanZoom({ bogeys }) {
     console.log(e);
   };
 
+    const dispatch = useDispatch();
+
+  const handleSelectBogey = (bogey_id) => dispatch(
+      battle_store.actions.select_bogey(bogey_id)
+  );
+
   return (
     <div className={styles.wrapper}>
       <BattleMap
@@ -94,6 +99,7 @@ export default function BattleMapPanZoom({ bogeys }) {
         viewbox={viewbox}
         onDragMap={drag_map}
         onZoomMap={zoom_map}
+        onSelectBogey={handleSelectBogey}
       />
       <div className={styles.radar}>
         <BattleMap

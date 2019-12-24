@@ -6,7 +6,7 @@ import NavItem from './NavItem';
 
 export default function Navigation({
   drive,
-  orders,
+  orders = {},
   navigation,
   onOrdersChange = () => {}
 }) {

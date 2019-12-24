@@ -1,0 +1,12 @@
+
+.BattleBody {
+  display: flex;
+}
+.battlemap {
+  min-width: 800px;
+  flex-grow: 1;
+}
+.sidepanels {
+  width: 400px;
+  margin-left: 10px;
+}

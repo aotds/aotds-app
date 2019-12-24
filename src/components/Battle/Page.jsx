@@ -5,14 +5,14 @@ import fp from 'lodash/fp';
 
 import { createStore  } from '../../store/battle';
 
-import BattleMapPanZoom from './BattleMapPanZoom';
+import Body from './Body';
 
 const BattleBody = () => {
     const bogeys = Object.values(useSelector(fp.getOr([],'battle.bogeys')));
     console.log({bogeys});
 
 
-    return <BattleMapPanZoom bogeys={bogeys} />
+    return <Body bogeys={bogeys} />
 };
 
 export default function BattlePage({ battle_id }) {

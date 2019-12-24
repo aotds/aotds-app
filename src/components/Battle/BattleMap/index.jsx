@@ -30,7 +30,6 @@ export default function BattleMap({
   onZoomMap = () => true
 }) {
   const drag_bind = useDrag(({ down, delta, movement }) => {
-    console.log({ down, delta });
     if (down) return onDragMap(delta);
     if (movement[0] === 0 && movement[0] === 0) return onClickMap();
   });
@@ -38,8 +37,6 @@ export default function BattleMap({
   const wheel_bind = useWheel(({ delta: [x, y] }) => {
     onZoomMap(y);
   });
-
-  console.log(drag_bind());
 
   return (
     <svg
