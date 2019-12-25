@@ -1,10 +1,6 @@
 import React from 'react';
 
-const SCALE = 5;
-
-const scaled = length => SCALE * length;
-
-const coords2map = ([x, y]) => [SCALE * x, -SCALE * y];
+import { coords2map } from './utils';
 
 const heading2angle = heading => 30 * heading;
 
