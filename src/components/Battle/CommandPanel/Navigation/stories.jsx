@@ -4,7 +4,7 @@ import Navigation from './index';
 import { action } from '@storybook/addon-actions';
 
 export default {
-  title: 'Navigation'
+  title: 'CommandPanel|Navigation'
 };
 
 const drive = { current: 3, rating: 6 };

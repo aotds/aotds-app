@@ -2,7 +2,7 @@ import React from 'react';
 import Firecons from './index';
 
 export default {
-  title: 'Firecons'
+  title: 'CommandPanel|Firecons'
 };
 
 const props = {
