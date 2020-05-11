@@ -1,8 +1,10 @@
-import React from 'react';
+<script>
+  export let drive;
+  export let thrust_used;
+</script>
 
-export default function Drive({ drive, thrust_used }) {
-  return (
-    <div className="drive">
+
+    <div class="drive">
       drive: {thrust_used} / {drive.current}
       <div class="bar">
         <progress max={drive.current} value={thrust_used}>
@@ -10,5 +12,3 @@ export default function Drive({ drive, thrust_used }) {
         </progress>
       </div>
     </div>
-  );
-}

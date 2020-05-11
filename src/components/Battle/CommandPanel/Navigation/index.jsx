@@ -2,7 +2,7 @@ import React from 'react';
 import fp from 'lodash/fp';
 
 import Drive from './Drive';
-import NavItem from './NavItem';
+import NavItem from './NavItem.svelte';
 
 export default function Navigation({
   drive,

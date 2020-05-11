@@ -18,10 +18,6 @@ export default function CommandPanel({ bogey, bogeys }) {
 
   return (
     <div>
-      <h1>{bogey.name || bogey.id}</h1>
-
-      <Structure {...bogey.structure} />
-
       <input
         type="button"
         value={orders_sent ? 'orders sent' : 'send orders'}
