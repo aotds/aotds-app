@@ -13,13 +13,3 @@ const Shield = ({ level, damaged }) => {
   );
 };
 
-export default function Shields({ shields = [] }) {
-  return (
-    <div>
-      shields:
-      {shields.map(shield => (
-        <Shield key={shield.id} {...shield} />
-      ))}
-    </div>
-  );
-}

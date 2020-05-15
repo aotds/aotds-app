@@ -11,7 +11,15 @@
   let thrust_used;
   $: thrust_used = fp.getOr(0, 'course.thrust_used', navigation);
 
-  let maneuver_types = ['thrust', 'turn', 'bank'];
+  const maneuver_types = ['thrust', 'turn', 'bank'];
+
+  const get_min = type => fp.getOr(0,[
+    'maneuvers', type, 0
+  ]);
+  const get_max = type => fp.getOr(0,[
+    'maneuvers', type, 1
+  ]);
+
 </script>
 
 <fieldset>
@@ -21,9 +29,9 @@
 
   {#each maneuver_types as type (type)}
     <NavItem
-      min={navigation.maneuvers[type][0]}
-      max={navigation.maneuvers[type][1]}
-      value={orders[type]}
+      min={get_min(type)(navigation)}
+      max={get_max(type)(navigation)}
+      value={orders[type]||0}
       label={type}
       on:change={x => console.log(x.target.value)}/>
   {/each}
