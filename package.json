@@ -5,25 +5,31 @@
   "dependencies": {
     "@babel/core": "^7.9.6",
     "@material-ui/core": "^4.8.0",
+    "@shopify/draggable": "^1.0.0-beta.8",
     "@storybook/addon-knobs": "^5.2.8",
     "@storybook/svelte": "^5.3.18",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/user-event": "^7.1.2",
     "babel-loader": "^8.1.0",
     "classnames": "^2.2.6",
+    "css-loader": "^3.5.3",
     "http-proxy-middleware": "^0.20.0",
+    "mini-css-extract-plugin": "^0.9.0",
     "redux-devtools-extension": "^2.13.8",
     "redux-mock-store": "^1.5.4",
+    "style-loader": "^1.2.1",
     "svelte": "^3.22.2",
     "svelte-loader": "^2.13.6",
+    "svelte-routing": "^1.4.2",
     "updeep": "^1.2.0",
-    "updux": "^1.2.0"
+    "updux": "^1.2.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "start": "webpack-dev-server --content-base public",
+    "build": "cross-env NODE_ENV=production webpack",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public"
   },
@@ -42,7 +48,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.9.0",
-    "@storybook/addon-actions": "^5.2.8",
+    "@storybook/addon-actions": "^5.3.18",
     "@storybook/addon-links": "^5.2.8",
     "@storybook/addons": "^5.2.8"
   }

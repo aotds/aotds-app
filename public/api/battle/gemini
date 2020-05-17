@@ -1,0 +1,185 @@
+ {
+  "bogeys":  [
+     {
+      "drive":  {
+        "current": 6,
+        "damage_level": 0,
+        "rating": 6
+      },
+      "id": "enkidu",
+      "name": "Enkidu",
+      "navigation":  {
+        "coords":  [
+          1.5,
+          0.8660254037844388
+        ],
+        "heading": 1,
+        "maneuvers":  {
+          "bank":  [
+            -3,
+            3
+          ],
+          "thrust":  [
+            0,
+            4
+          ],
+          "turn":  [
+            -3,
+            3
+          ]
+        },
+        "thrust_used": 3,
+        "velocity": 1
+      },
+      "orders":  {},
+      "player_id": "yanick",
+      "structure":  {
+        "armor":  {
+          "current": 4,
+          "rating": 4
+        },
+        "destroyed": false,
+        "hull":  {
+          "current": 4,
+          "last_internal_check": 4,
+          "rating": 4
+        }
+      },
+      "weaponry":  {
+        "firecons":  [
+           {
+            "id": 1
+          }
+        ],
+        "shields":  [
+           {
+            "id": 1,
+            "level": 1
+          },
+           {
+            "id": 2,
+            "level": 2
+          }
+        ],
+        "weapons":  [
+           {
+            "arcs":  [
+              "F"
+            ],
+            "id": 1,
+            "weapon_class": 2,
+            "weapon_type": "beam"
+          },
+           {
+            "arcs":  [
+              "FS"
+            ],
+            "id": 2,
+            "weapon_class": 1,
+            "weapon_type": "beam"
+          },
+           {
+            "arcs":  [
+              "FP"
+            ],
+            "id": 3,
+            "weapon_class": 1,
+            "weapon_type": "beam"
+          }
+        ]
+      }
+    },
+     {
+      "drive":  {
+        "current": 6,
+        "damage_level": 0,
+        "rating": 6
+      },
+      "id": "siduri",
+      "name": "Siduri",
+      "navigation":  {
+        "coords":  [
+          10,
+          9
+        ],
+        "heading": 6,
+        "maneuvers":  {
+          "bank":  [
+            -3,
+            3
+          ],
+          "thrust":  [
+            0,
+            6
+          ],
+          "turn":  [
+            -3,
+            3
+          ]
+        },
+        "thrust_used": 1,
+        "trajectory":  [
+           {
+            "coords":  [
+              10,
+              10
+            ],
+            "type": "POSITION"
+          },
+           {
+            "coords":  [
+              10,
+              9
+            ],
+            "delta":  [
+              1.2246467991473532e-16,
+              -1
+            ],
+            "type": "MOVE"
+          }
+        ],
+        "velocity": 1
+      },
+      "orders":  {},
+      "player_id": "yenzie",
+      "structure":  {
+        "armor":  {
+          "current": 4,
+          "rating": 4
+        },
+        "destroyed": false,
+        "hull":  {
+          "current": 4,
+          "last_internal_check": 4,
+          "rating": 4
+        }
+      },
+      "weaponry":  {
+        "firecons":  [],
+        "shields":  [
+           {
+            "id": 1,
+            "level": 1
+          },
+           {
+            "id": 2,
+            "level": 2
+          }
+        ],
+        "weapons":  []
+      }
+    }
+  ],
+  "game":  {
+    "name": "gemini",
+    "players":  [
+       {
+        "id": "yanick"
+      },
+       {
+        "id": "yenzie"
+      }
+    ],
+    "turn": 1
+  }
+}
