@@ -4,6 +4,7 @@
   import { setContext } from 'svelte';
   import battle_store from './store';
   import BattleMap from './BattleMap/index.svelte';
+  import BattleMapPanZoom from './BattleMapPanZoom.svelte';
 
   // now get the battle from the rest server.
   const [ store, loaded ] = battle_store(battle);
@@ -26,7 +27,7 @@ This is the battle of {battle}
   loading...
 {:then}
   We have a battle! {JSON.stringify($store)}
-  <BattleMap {bogeys} />
+  <BattleMapPanZoom {bogeys} />
 
 {:catch error}
   Oops {error}
