@@ -2,6 +2,7 @@
   export let battle;
 
   import { setContext } from 'svelte';
+  import { writable } from 'svelte/store';
   import battle_store from './store';
   import BattleMap from './BattleMap/index.svelte';
   import BattleMapPanZoom from './BattleMapPanZoom.svelte';
@@ -12,6 +13,17 @@
   setContext('battle',store);
   let bogeys = [];
   $: bogeys = $store && $store.bogeys;
+
+  const selected_bogey = writable(null);
+  setContext('selected_bogey',selected_bogey);
+
+  $: if(!$selected_bogey && bogeys && bogeys.length) {
+    selected_bogey.set(bogeys[0].id);
+  }
+
+  const select_bogey = ({detail}) => {
+    selected_bogey.set(detail);
+  };
 
 </script>
 
@@ -26,9 +38,7 @@ This is the battle of {battle}
 {#await loaded}
   loading...
 {:then}
-  We have a battle! {JSON.stringify($store)}
-  <BattleMapPanZoom {bogeys} />
-
+  <BattleMapPanZoom {bogeys} on:select_bogey={select_bogey} />
 {:catch error}
   Oops {error}
 {/await}

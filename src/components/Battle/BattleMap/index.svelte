@@ -3,7 +3,7 @@
   class:main_map={!radar}
 >
   {#each bogeys as bogey (bogey.id)}
-    <Bogey {...bogey} />
+    <Bogey {...bogey} {radar} on:select={select_bogey(bogey.id)} />
   {/each}
 </svg>
 
@@ -16,6 +16,15 @@
   import svgpanzoom from './svgpanzoom';
   import { coords2map } from './utils';
   import fp from 'lodash/fp';
+  import { createEventDispatcher } from 'svelte';
+
+  const dispatch = createEventDispatcher();
+
+  const select_bogey = (bogey_id) => () => {
+    if(radar) return;
+
+    dispatch('select_bogey',bogey_id);
+  }
 
   let map_area = {
     x: 0,

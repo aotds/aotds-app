@@ -44,7 +44,7 @@
 </style>
 
 <div class="main_map_section">
-  <BattleMap {bogeys} />
+  <BattleMap {bogeys} on:select_bogey />
 </div>
 
 <div class="thumbViewContainer">
