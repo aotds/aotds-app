@@ -3,6 +3,9 @@
   class:main_map={!radar}
 >
   {#each bogeys as bogey (bogey.id)}
+    <BogeyCourse {...bogey} />
+  {/each}
+  {#each bogeys as bogey (bogey.id)}
     <Bogey {...bogey} {radar} on:select={select_bogey(bogey.id)} />
   {/each}
 </svg>
@@ -13,6 +16,7 @@
   export let radar = false;
 
   import Bogey from './Bogey/index.svelte';
+  import BogeyCourse from './BogeyCourse/index.svelte';
   import svgpanzoom from './svgpanzoom';
   import { coords2map } from './utils';
   import fp from 'lodash/fp';

@@ -6,6 +6,7 @@
   import battle_store from './store';
   import BattleMap from './BattleMap/index.svelte';
   import BattleMapPanZoom from './BattleMapPanZoom.svelte';
+  import Sidebar from './Sidebar/index.svelte';
 
   // now get the battle from the rest server.
   const [ store, loaded ] = battle_store(battle);
@@ -28,18 +29,16 @@
 </script>
 
 <style>
-div {
-  background-color: red;
-}
 </style>
 
-This is the battle of {battle}
+<div class="battle_title">Battle of {battle}</div>
 
-{#await loaded}
+<div class="battle_main">{#await loaded}
   loading...
 {:then}
-  <BattleMapPanZoom {bogeys} on:select_bogey={select_bogey} />
+    <BattleMapPanZoom {bogeys} on:select_bogey={select_bogey} />
+    <Sidebar />
 {:catch error}
   Oops {error}
 {/await}
-
+</div>
