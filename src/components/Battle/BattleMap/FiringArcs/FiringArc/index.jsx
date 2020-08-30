@@ -1,7 +1,7 @@
 import React from 'react';
 import fp from 'lodash/fp';
 
-import { arc_ranges } from 'aotds-battle';
+import { arc_ranges } from '@aotds/battle';
 import Position from '../../Position';
 import { map_scale } from '../../utils';
 
