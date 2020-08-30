@@ -1,47 +1,28 @@
-import Updux from 'updux';
+import { writable } from 'svelte/store';
+import {plotMovement} from '@aotds/battle';
 import u from 'updeep';
 
-import fp from 'lodash/fp';
+async function fetch_battle(name) {
+    let battle = await fetch('/api/battle/'+name).then( res => res.json() );
 
-import { composeWithDevTools } from 'redux-devtools-extension';
-
-const uu = gen => state => u(gen(state),state);
-
-const update_selected_bogey = state => {
-    return u.updateIn( 'battle.bogeys',
+    battle = u.updateIn( 'bogeys',
         u.map(
-            uu( ({id}) => ({ selected: id === state.selected_bogey_id }) )
-        )
-    )(state);
+            bogey => u.updateIn('navigation.course', u.constant(plotMovement(bogey)), bogey )
+        ), battle
+    );
+
+    console.log(battle);
+
+
+    return battle;
 }
 
-const updux = new Updux({
-  composeEnhancers: composeWithDevTools,
-  initial: {
-    selected_bogey_id: null
-  },
-  mutations: {
-    fetch_battle_success: battle =>
-      fp.flow([
-          u({ battle: u.constant(battle) }),
-          update_selected_bogey
-      ]) ,
-    select_bogey: bogey_id => fp.flow(
-        [ u({ selected_bogey_id: bogey_id }),
-            update_selected_bogey ]
-    )
-  },
-  effects: {
-    fetch_battle: ({ dispatch }) => next => async action => {
-      next(action);
-      fetch(`/api/battle/${action.payload}`)
-        .then(doc => doc.json())
-        .then(game => {
-          dispatch.fetch_battle_success(game);
-        });
-    }
-  }
-});
+export default function battle_store(name) {
 
-export default updux;
-export const createStore = updux.createStore;
+    const store = writable(null);
+    const loaded = fetch_battle(name).then(
+        store.set
+    );
+
+    return [ store, loaded ];
+}

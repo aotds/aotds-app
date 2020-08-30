@@ -3,7 +3,7 @@
 
   import { setContext } from 'svelte';
   import { writable } from 'svelte/store';
-  import battle_store from './store';
+  import battle_store from '~/store/battle';
   import BattleMap from './BattleMap/index.svelte';
   import BattleMapPanZoom from './BattleMapPanZoom.svelte';
   import Sidebar from './Sidebar/index.svelte';

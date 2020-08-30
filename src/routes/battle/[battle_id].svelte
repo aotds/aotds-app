@@ -4,7 +4,6 @@
   export async function preload(page,context) {
     const { battle_id } = page.params;
 
-    console.log(page.params);
     return {battle_id};
   }
 </script>
