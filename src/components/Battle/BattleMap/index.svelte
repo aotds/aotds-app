@@ -17,7 +17,6 @@
 
   import Bogey from './Bogey/index.svelte';
   import BogeyCourse from './BogeyCourse/index.svelte';
-  import svgpanzoom from './svgpanzoom';
   import { coords2map } from './utils';
   import fp from 'lodash/fp';
   import { createEventDispatcher } from 'svelte';

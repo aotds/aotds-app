@@ -2,12 +2,13 @@
   import BattleMap from './BattleMap/index.svelte';
   import Bogey from './BattleMap/Bogey/index.svelte';
   import { onMount } from 'svelte';
-  import thumbnailViewer from './BattleMapPanZoom/thumbnailViewer';
 
   export let bogeys = [];
 
-  onMount(() => {
-    thumbnailViewer({
+  onMount(async() => {
+    const thumbnailViewer = await import(
+      './BattleMapPanZoom/thumbnailViewer');
+    thumbnailViewer.default({
       mainViewId: '.main_map',
       thumbViewId: '.radar'
     });

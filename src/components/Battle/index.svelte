@@ -1,5 +1,5 @@
 <script>
-  export let battle;
+  export let battle_id;
 
   import { setContext } from 'svelte';
   import { writable } from 'svelte/store';
@@ -9,7 +9,7 @@
   import Sidebar from './Sidebar/index.svelte';
 
   // now get the battle from the rest server.
-  const [ store, loaded ] = battle_store(battle);
+  const [ store, loaded ] = battle_store(battle_id);
 
   setContext('battle',store);
   let bogeys = [];
@@ -31,7 +31,7 @@
 <style>
 </style>
 
-<div class="battle_title">Battle of {battle}</div>
+<div class="battle_title">Battle of {battle_id}</div>
 
 <div class="battle_main">{#await loaded}
   loading...

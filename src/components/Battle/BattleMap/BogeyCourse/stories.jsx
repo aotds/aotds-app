@@ -1,7 +1,7 @@
 import React from 'react';
 import Bogey  from '../Bogey';
 import BogeyCourse  from '.';
-import { plot_movement } from 'aotds-battle/build/rules/movement';
+import { plot_movement } from '@aotds/battle/build/rules/movement';
 import u from 'updeep';
 import {withKnobs, number} from '@storybook/addon-knobs';
 import { coords2map } from '../utils';
