@@ -18,7 +18,7 @@ app.use(rest_api({
 const sapper_app = express();
 sapper_app.use(
     compression({ threshold: 0 }),
-    sirv('static', { dev }),
+    sirv('public', { dev }),
     sapper.middleware()
 );
 
