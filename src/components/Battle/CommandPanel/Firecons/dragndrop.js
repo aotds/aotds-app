@@ -1,6 +1,6 @@
-import { Draggable, Droppable } from '@shopify/draggable';
+export default async function (node) {
+  const { Draggable, Droppable } = (await import('@shopify/draggable')).default;
 
-export default function (node) {
   const draggable = new Droppable(node.querySelectorAll('.firecon'), {
     draggable: '.weapon',
     dropzone: '.weapons',

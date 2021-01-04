@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import {plotMovement} from '@aotds/battle';
+import {plotMovement} from '@aotds/aotds-battle';
 import u from 'updeep';
 
 async function fetch_battle(name) {
