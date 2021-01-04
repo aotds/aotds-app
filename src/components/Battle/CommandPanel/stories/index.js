@@ -3,7 +3,7 @@ import Component from '../index.svelte';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, text, boolean, number } from "@storybook/addon-knobs";
 
-import { inflateBogey } from '@aotds/battle';
+import { inflate_bogey } from '@aotds/aotds-battle';
 import u from 'updeep';
 
 export default {
@@ -11,7 +11,7 @@ export default {
     decorators: [withKnobs]
 };
 
-const bogey = u.updateIn('weaponry.shields.1', {damaged: true})(inflateBogey({
+const bogey = u.updateIn('weaponry.shields.1', {damaged: true})(inflate_bogey({
   name: 'Enkidu',
   structure: {
     hull: { current: 3, rating: 6 },

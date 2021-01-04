@@ -3,7 +3,7 @@ import Firecons from './index.svelte';
 import { action } from '@storybook/addon-actions';
 
 export default {
-    title: "CommandPanel|Firecons"
+    title: "Firecons"
 };
 
 let wp = undefined;
