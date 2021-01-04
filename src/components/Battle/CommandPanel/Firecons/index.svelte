@@ -12,9 +12,6 @@
 </script>
 
 <style>
-  div {
-    background-color: red;
-  }
 </style>
 
 <fieldset use:dragndrop on:assign_weapon_to_firecon>

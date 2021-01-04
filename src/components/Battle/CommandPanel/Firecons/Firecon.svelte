@@ -9,13 +9,14 @@
 </script>
 
 <div class="firecon" data-firecon-id={firecon_id}>
-  <h2>
-    {#if firecon_id}Firecon {firecon_id}{:else}Standby{/if}
-  </h2>
 
-  {#if firecon_id}
-    <Targets {targets} {target_id} />
-  {/if}
+  <div class="firecon-header">
+      <h2>{firecon_id || 'Standby' }</h2>
+      <div class="spacer"><hr /></div>
+      {#if firecon_id}
+        <Targets {targets} {target_id} />
+      {/if}
+  </div>
 
   <div class="weapons" data-firecon-id={firecon_id}>
     {#each weapons as weapon (weapon.id)}
@@ -29,6 +30,15 @@
 <style>
   :global(.draggable-container--over) {
     background-color: pink;
+  }
 
+  .firecon-header {
+    display: flex;
+    align-items: baseline;
+  }
+
+  .firecon-header .spacer {
+    flex: 1;
+    margin: 0px 1em;
   }
 </style>

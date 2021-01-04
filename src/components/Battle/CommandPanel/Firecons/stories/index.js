@@ -1,4 +1,4 @@
-import Firecons from '../index.svelte';
+import Firecons from './index.svelte';
 
 import { action } from '@storybook/addon-actions';
 
@@ -24,7 +24,6 @@ export const basic = () => ({
     on: {
         assign_weapon_to_firecon: event => {
             action('assign weapon to firecon')(event.detail)
-            console.log(event);
         }
     }
 })
