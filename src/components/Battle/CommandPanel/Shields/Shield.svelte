@@ -1,8 +1,6 @@
 <script>
-  export let level;
-  export let damaged;
-
-  import classnames from 'classnames';
+  export let level = 1;
+  export let damaged = false;
 </script>
 
 <style>
@@ -13,6 +11,8 @@
   border-radius: 0.6em;
   text-align: center;
   background-color: lightgreen;
+  font-family: var(--font-accent);
+  margin-right: 0.5em;
 
   }
 
@@ -21,6 +21,6 @@
 }
 </style>
 
-<span class={classnames(['shield', { damaged }])} >
+<span class='shield' class:damaged>
   {level}
 </span>

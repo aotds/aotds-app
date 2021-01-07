@@ -4,7 +4,7 @@
   import Drive from './Drive/index.svelte';
   import NavItem from './NavItem.svelte';
 
-  export let drive;
+  export let drive = {};
   export let navigation;
   export let orders = {};
 
@@ -25,7 +25,9 @@
 <fieldset>
   <legend>Navigation</legend>
 
-  <Drive {drive} {thrust_used} />
+  <div class="drive">
+    <Drive current={drive.current} rating={drive.rating} {thrust_used} />
+  </div>
 
   {#each maneuver_types as type (type)}
     <NavItem
@@ -37,3 +39,9 @@
   {/each}
 
 </fieldset>
+
+  <style>
+    .drive {
+      margin-bottom: 1em;
+    }
+  </style>

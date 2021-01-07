@@ -33,22 +33,4 @@ div {
     font-size: 1.2em;
   }
 
-  :global(@font-face) {
-    font-family: 'SciFly';
-    src: url('/fonts/SciFly-Sans.ttf')
-  }
-
-  :global(@font-face) {
-    font-family: 'RobotoMedium';
-    src: url('/fonts/roboto/Roboto-Medium.ttf');
-    font-weight: normal;
-    font-style: normal;
-  }
-
-  :global(@font-face) {
-    font-family: 'RobotoLight';
-    src: url('/fonts/roboto/Roboto-Light.ttf');
-    font-weight: normal;
-    font-style: normal;
-  }
 </style>

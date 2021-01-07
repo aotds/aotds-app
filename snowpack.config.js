@@ -7,5 +7,9 @@ module.exports = {
 	alias: {
 		'~C': './src/components',
         '~': './src',
-	}
+        'updeep': '@yanick/updeep'
+	},
+    installOptions: {
+        env: {NODE_ENV: true },
+    },
 };

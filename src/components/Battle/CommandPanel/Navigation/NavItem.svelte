@@ -16,3 +16,14 @@
 
 </div>
 
+  <style>
+  div {
+    display: flex;
+    align-content: baseline;
+  }
+    label {
+      display: inline-block;
+      width: 5em;
+    }
+  </style>
+

@@ -2,18 +2,39 @@
   export let hull = {};
   export let armor = {};
 
+  export let shields = [];
+
   import Hull from './Hull.svelte';
   import Armor from './Armor.svelte';
+  import Shields from './Shields/index.svelte';
 </script>
 
 <style>
-div {
-  background-color: red;
-}
+  .structure {
+    display: flex;
+  }
+  .structure > :global(*) {
+    margin-right: 1em;
+  }
+
+  .shields {
+    width: 100%;
+  }
+
 </style>
 
-<fielset class="structure">
-  <legend>Structure</legend>
+<div class="structure">
+
   <Hull {...hull} />
-  <Armor {...armor} />
-</fielset>
+
+  {#if armor.rating} <Armor {...armor} /> {/if}
+
+
+</div>
+
+  {#if shields.length}
+    <div class="shields">
+      <Shields {shields} />
+    </div>
+  {/if}
+
