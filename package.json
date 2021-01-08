@@ -37,7 +37,9 @@
   },
   "scripts": {
     "dev": "svelte-kit dev",
-    "build": "svelte-kit build"
+    "build": "svelte-kit build",
+    "lint:prettier": "prettier src",
+    "lint:prettier:fix": "prettier --write src"
   },
   "eslintConfig": {},
   "browserslist": {
@@ -63,6 +65,15 @@
     "@sveltejs/snowpack-config": "next",
     "babel-preset-env": "^1.7.0",
     "svelte": "^3.29.0",
-    "svite": "^0.8.1"
+    "svite": "^0.8.1",
+    "prettier": "^2.0.5",
+    "prettier-plugin-svelte": "2.0.2"
+  },
+  "prettier": {
+    "plugins": [
+      "prettier-plugin-svelte"
+    ],
+    "svelteSortOrder": "options-scripts-markup-styles",
+    "svelteStrictMode": true
   }
 }
