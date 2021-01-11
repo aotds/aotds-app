@@ -1,28 +1,24 @@
-import { writable } from 'svelte/store';
-import {plotMovement} from '@aotds/aotds-battle';
-import u from 'updeep';
+import { writable } from "svelte/store";
+//import { plotMovement } from "@aotds/aotds-battle";
 
-async function fetch_battle(name) {
-    let battle = await fetch('/api/battle/'+name).then( res => res.json() );
+const store = writable(null);
 
-    battle = u.updateIn( 'bogeys',
-        u.map(
-            bogey => u.updateIn('navigation.course', u.constant(plotMovement(bogey)), bogey )
-        ), battle
-    );
+export default store;
 
-    console.log(battle);
+// export async function fetch() {
+//   let battle = await fetch("/api/battle/" + this.name).then((res) =>
+//     res.json()
+//   );
 
+//   battle = u.updateIn(
+//     "bogeys",
+//     u.map((bogey) =>
+//       u.updateIn("navigation.course", u.constant(plotMovement(bogey)), bogey)
+//     ),
+//     battle
+//   );
 
-    return battle;
-}
+//   store.set(battle);
 
-export default function battle_store(name) {
-
-    const store = writable(null);
-    const loaded = fetch_battle(name).then(
-        store.set
-    );
-
-    return [ store, loaded ];
-}
+//   return battle;
+// }

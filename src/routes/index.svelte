@@ -1,4 +1,4 @@
-<div>TODO</div>
+<div>TODO routes</div>
 
 <script>
   import {inflate_bogey}  from '@aotds/aotds-battle';

@@ -12,6 +12,11 @@
     navigation: {
       course: {
         thrust_used: 2
+      },
+      maneuvers: {
+        thrust: [-4, 4],
+        turn: [-2,2],
+        bank: [-2,2],
       }
     },
     name: 'Enkidu',
@@ -24,6 +29,13 @@
     },
     weaponry: {
       shields: [1,2,2],
+    },
+    orders: {
+      navigation: {
+        thrust: 1,
+        bank: 1,
+        turn: -1,
+      }
     }
   });
   /* console.log(bogey); */

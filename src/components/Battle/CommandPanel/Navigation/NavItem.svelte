@@ -12,6 +12,7 @@
 
 <div>
   <label>{label}</label>
+  <span class="value">{value}</span>
   <input type="range" {min} {max} {value} on:change />
 
 </div>
@@ -24,6 +25,10 @@
     label {
       display: inline-block;
       width: 5em;
+    }
+
+    .value {
+      font-family: var(--font-accent);
     }
   </style>
 

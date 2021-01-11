@@ -1,44 +1,41 @@
 <script>
-  export let battle_id;
-
-  import { setContext } from 'svelte';
+  /* import { getContext } from 'svelte'; */
   import { writable } from 'svelte/store';
-  import battle_store from '~/store/battle';
-  import BattleMap from './BattleMap/index.svelte';
+  import _ from 'lodash';
+ import battle from '../../store/battle';
+  /* import BattleMap from './BattleMap/index.svelte'; */
   import BattleMapPanZoom from './BattleMapPanZoom.svelte';
-  import Sidebar from './Sidebar/index.svelte';
+  /* import Sidebar from './Sidebar/index.svelte'; */
 
-  // now get the battle from the rest server.
-  const [ store, loaded ] = battle_store(battle_id);
-
-  setContext('battle',store);
   let bogeys = [];
-  $: bogeys = $store && $store.bogeys;
 
-  const selected_bogey = writable(null);
-  setContext('selected_bogey',selected_bogey);
+  let name;
+  $: name = _.get( $battle, 'game.name', '' );
 
-  $: if(!$selected_bogey && bogeys && bogeys.length) {
-    selected_bogey.set(bogeys[0].id);
-  }
+  //$: bogeys = $battle && $battle.bogeys;
 
-  const select_bogey = ({detail}) => {
-    selected_bogey.set(detail);
-  };
+  /* const selected_bogey = writable(null); */
+  /* setContext('selected_bogey',selected_bogey); */
+
+  /* $: if(!$selected_bogey && bogeys && bogeys.length) { */
+  /*   selected_bogey.set(bogeys[0].id); */
+  /* } */
+
+  /* const select_bogey = ({detail}) => { */
+  /*   selected_bogey.set(detail); */
+  /* }; */
 
 </script>
 
 <style>
 </style>
 
-<div class="battle_title">Battle of {battle_id}</div>
+<div class="battle_title">Battle of {name}</div>
 
-<div class="battle_main">{#await loaded}
+<div class="battle_main">{#if $battle}
+    <BattleMapPanZoom {bogeys} />
+    <!-- <Sidebar /> -->
+{:else }
   loading...
-{:then}
-    <BattleMapPanZoom {bogeys} on:select_bogey={select_bogey} />
-    <Sidebar />
-{:catch error}
-  Oops {error}
-{/await}
+{/if}
 </div>
