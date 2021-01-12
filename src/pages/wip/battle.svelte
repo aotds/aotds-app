@@ -3,14 +3,9 @@
 <script>
   import Battle from '../../components/Battle/index.svelte';
   import battle from '../../store/battle';
-  import { inflate_battle }
-   from '@aotds/aotds-battle';
+  import sample from './sample_game';
 
-  battle.set(inflate_battle({
-    game: {
-      name: 'Epsilon 5',
-    }
-  }))
+  battle.set(sample);
 
 </script>
 

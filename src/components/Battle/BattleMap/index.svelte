@@ -32,8 +32,8 @@
   let map_area = {
     x: 0,
     y: 0,
-    height: 600,
-    width: 600
+    height: 850,
+    width: 850
   };
 
   $: if (bogeys.length > 0) {
@@ -72,8 +72,8 @@
 .main_map {
   background-image: url('/starbackground.jpg');
   background-repeat: repeat;
-  width: 600px;
-  height: 600px;
+  width: 850px;
+  height: 850px;
 }
 
 .radar {

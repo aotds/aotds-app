@@ -2,17 +2,14 @@
   /* import { getContext } from 'svelte'; */
   import { writable } from 'svelte/store';
   import _ from 'lodash';
- import battle from '../../store/battle';
+  import battle from '../../store/battle';
+  import {bogeys, selected_bogey } from '../../store/bogeys';
   /* import BattleMap from './BattleMap/index.svelte'; */
   import BattleMapPanZoom from './BattleMapPanZoom.svelte';
   /* import Sidebar from './Sidebar/index.svelte'; */
 
-  let bogeys = [];
-
   let name;
   $: name = _.get( $battle, 'game.name', '' );
-
-  //$: bogeys = $battle && $battle.bogeys;
 
   /* const selected_bogey = writable(null); */
   /* setContext('selected_bogey',selected_bogey); */
@@ -33,7 +30,7 @@
 <div class="battle_title">Battle of {name}</div>
 
 <div class="battle_main">{#if $battle}
-    <BattleMapPanZoom {bogeys} />
+    <BattleMapPanZoom bogeys={$bogeys} />
     <!-- <Sidebar /> -->
 {:else }
   loading...
