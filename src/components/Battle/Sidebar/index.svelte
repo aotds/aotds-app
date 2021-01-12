@@ -1,11 +1,9 @@
 <script>
+  import CommandPanel from '../CommandPanel/index.svelte';
 
 </script>
 
 <style>
-div {
-  background-color: red;
-}
 </style>
 
-<div>TODO</div>
+<CommandPanel />

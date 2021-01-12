@@ -1,11 +1,15 @@
 <Battle />
 
 <script>
+  import { setContext } from 'svelte';
   import Battle from '../../components/Battle/index.svelte';
-  import battle from '../../store/battle';
+  import BattleStore from '../../store/battle';
   import sample from './sample_game';
 
+  const battle = new BattleStore();
   battle.set(sample);
+
+  setContext('battle',battle);
 
 </script>
 

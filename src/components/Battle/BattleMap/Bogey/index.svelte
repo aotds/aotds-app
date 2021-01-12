@@ -5,7 +5,7 @@
   import Position from './Position.svelte';
   import { createEventDispatcher, getContext } from 'svelte';
 
-  import {select_bogey} from '../../../../store/bogeys';
+  const battle = getContext('battle');
 
   export let radar = false;
 
@@ -13,7 +13,7 @@
 
   export let selected = false;
 
-  const select = () => select_bogey(id);
+  const select = () => battle.select_bogey(id);
 
 </script>
 

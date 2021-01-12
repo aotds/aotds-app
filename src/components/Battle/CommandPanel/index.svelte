@@ -2,6 +2,7 @@
   export let bogey = {};
 
   import fp from 'lodash/fp';
+  import _ from 'lodash';
   import Structure from './Structure.svelte';
   import Navigation from './Navigation/index.svelte';
 
@@ -12,13 +13,18 @@
 
   let navigation_orders;
   $: navigation_orders = fp.getOr({}, 'orders.navigation', bogey);
+
+  let shields, hull;
+  $: shields = _.get( bogey, 'weaponry.shields', [] );
+  $: hull = _.get( bogey, 'structure.hull', undefined);
+  $: armor = _.get(bogey, 'structure.armor', undefined );
+
 </script>
 
 <div>
   <h1>{bogey.name}</h1>
 
-  <Structure shields={ bogey.weaponry.shields } hull={bogey.structure.hull}
-    armor={bogey.structure.armor} />
+  <Structure {shields} {hull} {armor} />
 
   <input
     type="button"
