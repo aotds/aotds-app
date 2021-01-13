@@ -1,5 +1,6 @@
 <script>
-  export let bogey = {};
+  export let bogey = null;
+
 
   import fp from 'lodash/fp';
   import _ from 'lodash';

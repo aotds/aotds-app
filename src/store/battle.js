@@ -3,24 +3,22 @@ import _ from 'lodash';
 import u from '@yanick/updeep';
 //import { plotMovement } from "@aotds/aotds-battle";
 
-export default class BattleStore {
-  constructor() {
-    this.store = writable(null);
+export default function BattleStore() {
+    const store = writable(null);
 
-    this.selected_bogey = writable(null);
+    const selected_bogey = writable(null);
 
-    const seed_bogey = () => _.get(get(this.store), "bogeys.0", null);
+    const seed_bogey = () => _.get(get(store), "bogeys.0", null);
 
-      console.log(this.store);
-    this.store.subscribe(($battle) => {
-      const selected = get(this.selected_bogey);
+    store.subscribe(($battle) => {
+      const selected = get(selected_bogey);
       if (_.find(_.get($battle, "bogeys", []), { id: selected })) return;
 
-      this.selected_bogey.set(_.get(seed_bogey(), "id", null));
+      selected_bogey.set(_.get(seed_bogey(), "id", null));
     });
 
-    this.bogeys = derived(
-      [this.store, this.selected_bogey],
+    const bogeys = derived(
+      [store, selected_bogey],
       ([$battle, $selected_bogey], set) => {
         set(
           _.get($battle, "bogeys", []).map(
@@ -29,14 +27,14 @@ export default class BattleStore {
         );
       }
     );
-  }
 
-  set(battle) {
-    return this.store.set(battle);
-  }
+  const select_bogey = selected_bogey.set;
 
-  select_bogey(id) {
-    this.selected_bogey.set(id);
+  return {
+      select_bogey,
+      selected_bogey,
+      bogeys,
+      store,
   }
 }
 

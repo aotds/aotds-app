@@ -3,7 +3,7 @@
   class:main_map={!radar}
 >
   {#each bogeys as bogey (bogey.id)}
-    <BogeyCourse {...bogey} />
+    <BogeyCourse {bogey} />
   {/each}
   {#each bogeys as bogey (bogey.id)}
     <Bogey {...bogey} {radar} on:select={select_bogey(bogey.id)} />

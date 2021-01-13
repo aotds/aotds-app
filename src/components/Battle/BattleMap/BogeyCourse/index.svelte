@@ -3,8 +3,9 @@
   import fp from 'lodash/fp';
   import { coords2map } from '../utils';
   import Position from '../Bogey/Position.svelte';
+  import {plot_movement} from '@aotds/aotds-battle';
 
-  function path_for(trajectory) {
+  function path_for(trajectory=[]) {
     return (
       'M ' +
       trajectory
@@ -16,15 +17,22 @@
     );
   }
 
-  export let navigation = {};
+  export let bogey = {};
+
+  let course;
+  $: course = plot_movement(bogey);
+
+  $: console.log(bogey);
 
   let path = [];
-  $: path = path_for(fp.getOr([], 'course.trajectory', navigation));
+  $: path = path_for(course.trajectory);
+
+  $: console.log(path);
 </script>
 
 <g class="course">
   <path d={path} />
-  <Bogey navigation={navigation.course} />
+  <Bogey navigation={course} />
 </g>
 
   <style>

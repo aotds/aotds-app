@@ -25,9 +25,12 @@
 <fieldset>
   <legend>Navigation</legend>
 
+  <div class="velocity">current velocity <span>{navigation.velocity || 0}</span> </div>
+
   <div class="drive">
     <Drive current={drive.current} rating={drive.rating} {thrust_used} />
   </div>
+
 
   {#each maneuver_types as type (type)}
     <NavItem
@@ -41,6 +44,13 @@
 </fieldset>
 
   <style>
+    .velocity span {
+      font-family: var(--font-accent);
+      margin-left: 2em;
+    }
+    .velocity {
+      margin-bottom: 1em;
+    }
     .drive {
       margin-bottom: 1em;
     }

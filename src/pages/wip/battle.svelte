@@ -6,8 +6,8 @@
   import BattleStore from '../../store/battle';
   import sample from './sample_game';
 
-  const battle = new BattleStore();
-  battle.set(sample);
+  const battle = BattleStore();
+  battle.store.set(sample);
 
   setContext('battle',battle);
 
