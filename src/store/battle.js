@@ -1,7 +1,9 @@
 import { writable, derived, get } from "svelte/store";
+import fp from 'lodash/fp';
 import _ from 'lodash';
 import u from '@yanick/updeep';
-//import { plotMovement } from "@aotds/aotds-battle";
+import constant from '@yanick/updeep/dist/constant';
+import { plot_movement } from "@aotds/aotds-battle";
 
 export default function BattleStore() {
     const store = writable(null);
@@ -20,21 +22,49 @@ export default function BattleStore() {
     const bogeys = derived(
       [store, selected_bogey],
       ([$battle, $selected_bogey], set) => {
-        set(
-          _.get($battle, "bogeys", []).map(
-            u.if(_.matches({ id: $selected_bogey }), { selected: true })
-          )
-        );
+          _.flow(
+            fp.getOr([], 'bogeys'),
+            u.map(
+                u.if(_.matches({ id: $selected_bogey }), { selected: true })
+            ),
+            u.map(
+                bogey => {
+                    const course = plot_movement(bogey);
+                    return u({
+                        navigation: { course },
+                        orders: { navigation: course.orders }
+                    },bogey)
+                }
+            ),
+              set
+          )($battle);
       }
     );
 
   const select_bogey = selected_bogey.set;
+
+   const set_navigation_order = (id,{type,value}) =>
+        store.update( $store =>
+            u.updateIn( 'bogeys',
+                u.map( u.if(fp.matches({id}), bogey => {
+                    bogey = u.updateIn(['orders','navigation',type], value, bogey);
+                    const course = plot_movement(bogey);
+                    return u({
+                        navigation: { course },
+                        orders: { navigation: course.orders }, // to restrict the command
+                    },bogey)
+                })),
+                $store)
+
+        )
+   ;
 
   return {
       select_bogey,
       selected_bogey,
       bogeys,
       store,
+      set_navigation_order,
   }
 }
 

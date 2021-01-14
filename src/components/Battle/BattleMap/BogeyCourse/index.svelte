@@ -22,12 +22,8 @@
   let course;
   $: course = plot_movement(bogey);
 
-  $: console.log(bogey);
-
   let path = [];
   $: path = path_for(course.trajectory);
-
-  $: console.log(path);
 </script>
 
 <g class="course">
