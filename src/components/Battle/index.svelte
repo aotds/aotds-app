@@ -1,44 +1,57 @@
 <script>
-  export let battle_id;
-
-  import { setContext } from 'svelte';
-  import { writable } from 'svelte/store';
-  import battle_store from '~/store/battle';
-  import BattleMap from './BattleMap/index.svelte';
+  import { getContext } from 'svelte';
+  import _ from 'lodash';
+  //import battle from '../../store/battle';
+  //import {bogeys, selected_bogey } from '../../store/bogeys';
+  /* import BattleMap from './BattleMap/index.svelte'; */
   import BattleMapPanZoom from './BattleMapPanZoom.svelte';
   import Sidebar from './Sidebar/index.svelte';
 
-  // now get the battle from the rest server.
-  const [ store, loaded ] = battle_store(battle_id);
+  const battle = getContext('battle');
+  const battle_store = battle.store;
+  const bogeys = battle.bogeys;
 
-  setContext('battle',store);
-  let bogeys = [];
-  $: bogeys = $store && $store.bogeys;
+  let name;
+  $: name = _.get( $battle_store, 'game.name', '' );
 
-  const selected_bogey = writable(null);
-  setContext('selected_bogey',selected_bogey);
+  /* const selected_bogey = writable(null); */
+  /* setContext('selected_bogey',selected_bogey); */
 
-  $: if(!$selected_bogey && bogeys && bogeys.length) {
-    selected_bogey.set(bogeys[0].id);
-  }
+  /* $: if(!$selected_bogey && bogeys && bogeys.length) { */
+  /*   selected_bogey.set(bogeys[0].id); */
+  /* } */
 
-  const select_bogey = ({detail}) => {
-    selected_bogey.set(detail);
-  };
+  /* const select_bogey = ({detail}) => { */
+  /*   selected_bogey.set(detail); */
+  /* }; */
 
 </script>
 
 <style>
+  .main {
+    display: flex;
+    width: 100%;
+    min-width: 1200px;
+  }
+  .map {
+    flex: 1;
+  }
+  .sidebar {
+    width: 350px;
+  }
 </style>
 
-<div class="battle_title">Battle of {battle_id}</div>
+<div class="battle_title">Battle of {name}</div>
 
-<div class="battle_main">{#await loaded}
+{#if $battle_store}
+<div class="main">
+    <div class="map">
+      <BattleMapPanZoom bogeys={$bogeys} />
+    </div>
+    <div class="sidebar">
+      <Sidebar />
+    </div>
+  </div>
+{:else }
   loading...
-{:then}
-    <BattleMapPanZoom {bogeys} on:select_bogey={select_bogey} />
-    <Sidebar />
-{:catch error}
-  Oops {error}
-{/await}
-</div>
+{/if}

@@ -1,14 +1,31 @@
 <script>
-  export let drive;
-  export let thrust_used;
+  export let current = 0;
+  export let rating = 0;
+  export let thrust_used = 0;
 </script>
 
 
     <div class="drive">
-      drive: {thrust_used} / {drive.current}
-      <div class="bar">
-        <progress max={drive.current} value={thrust_used}>
+      drive
+      <span>{current}</span>
+        <progress max={current} value={thrust_used}>
           {thrust_used}
         </progress>
-      </div>
+
     </div>
+
+  <style>
+    .drive {
+      display: flex;
+    }
+    span {
+      flex: 1;
+      display: inline-block;
+      text-align: right;
+      font-family: var(--font-accent);
+      margin-right: 1em;
+    }
+    progress {
+      width: 170px;
+    }
+  </style>

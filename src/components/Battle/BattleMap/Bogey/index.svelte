@@ -5,14 +5,15 @@
   import Position from './Position.svelte';
   import { createEventDispatcher, getContext } from 'svelte';
 
+  const battle = getContext('battle');
+
   export let radar = false;
 
   const dispatch = createEventDispatcher();
 
-  const selected_bogey = getContext('selected_bogey');
+  export let selected = false;
 
-  let selected = false;
-  $: selected = $selected_bogey === id;
+  const select = () => battle.select_bogey(id);
 
 </script>
 
@@ -30,7 +31,7 @@ div {
 
 <Position {...navigation}>
 <use
-  on:click={() => dispatch('select')}
+  on:click={select}
   class="bogey"
   class:selected
   href="/svg/ship/generic.svg#ship_generic"

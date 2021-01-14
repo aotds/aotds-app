@@ -1,9 +1,7 @@
 <script context="module">
   import Battle from '~C/Battle';
 
-  export async function preload(page,context) {
-    const { battle_id } = page.params;
-
+  export async function preload({params: {battle_id}}) {
     return {battle_id};
   }
 </script>

@@ -5,6 +5,7 @@
 
   import Firecon from './Firecon.svelte';
   import fp from 'lodash/fp';
+
   import dragndrop from './dragndrop';
 
   const weapons_for = id =>
@@ -12,9 +13,6 @@
 </script>
 
 <style>
-  div {
-    background-color: red;
-  }
 </style>
 
 <fieldset use:dragndrop on:assign_weapon_to_firecon>

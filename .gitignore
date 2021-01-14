@@ -4,3 +4,5 @@ pnpm-lock.yaml
 __sapper__/
 data
 package-lock.json
+.routify
+.svelte

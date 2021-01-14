@@ -3,7 +3,7 @@
   class:main_map={!radar}
 >
   {#each bogeys as bogey (bogey.id)}
-    <BogeyCourse {...bogey} />
+    <BogeyCourse {bogey} />
   {/each}
   {#each bogeys as bogey (bogey.id)}
     <Bogey {...bogey} {radar} on:select={select_bogey(bogey.id)} />
@@ -32,8 +32,8 @@
   let map_area = {
     x: 0,
     y: 0,
-    height: 600,
-    width: 600
+    height: 850,
+    width: 850
   };
 
   $: if (bogeys.length > 0) {
@@ -72,8 +72,8 @@
 .main_map {
   background-image: url('/starbackground.jpg');
   background-repeat: repeat;
-  width: 600px;
-  height: 600px;
+  width: 850px;
+  height: 850px;
 }
 
 .radar {

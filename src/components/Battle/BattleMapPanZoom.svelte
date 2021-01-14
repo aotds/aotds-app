@@ -17,13 +17,13 @@
 
 <style>
   .main_map_section {
-    width: 600px;
-    height: 600px;
+    width: 850px;
+    height: 850px;
   }
 
   .thumbViewClass,
   :global(.radar) {
-    border: 1px solid black;
+    border: 1px solid white;
     position: absolute;
     bottom: 5px;
     left: 5px;
