@@ -1,7 +1,7 @@
 <script>
   export let firecons = [];
   export let weapons = [];
-  export let targets;
+  export let targets = [];
 
   import Firecon from './Firecon.svelte';
   import fp from 'lodash/fp';

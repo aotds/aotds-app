@@ -1,14 +1,17 @@
 <script>
+  import fp from 'lodash/fp';
+  import _ from 'lodash';
+  import { getContext } from 'svelte';
+  import { relativeCoords } from '@aotds/aotds-battle';
+
+  import Structure from './Structure.svelte';
+  import Navigation from './Navigation/index.svelte';
+  import Firecons from './Firecons/index.svelte';
+
   export let bogey = null;
 
 
-  import fp from 'lodash/fp';
-  import _ from 'lodash';
-  import Structure from './Structure.svelte';
-  import Navigation from './Navigation/index.svelte';
-  import { getContext } from 'svelte';
-
-  const { set_navigation_order} = getContext('battle');
+  const { set_navigation_order, bogeys } = getContext('battle');
 
 
   let orders_sent;
@@ -24,9 +27,24 @@
   $: hull = _.get( bogey, 'structure.hull', undefined);
   $: armor = _.get(bogey, 'structure.armor', undefined );
 
+  let firecons, weapons;
+  $: firecons = _.get(bogey,'weaponry.firecons',[]);
+  $: weapons  = _.get(bogey,'weaponry.weapons', []);
+
   const handle_navigation_order = ({detail}) => {
     set_navigation_order(bogey.id,detail)
   };
+
+  let targets = [];
+
+  $: targets = _.sortBy($bogeys.filter(
+    ({player_id}) => player_id !== bogey.player_id
+  ).map(
+    b => ({
+      ...b,
+      distance: relativeCoords(bogey.navigation,b.navigation)
+    })
+  ), 'distance' );
 
 </script>
 
@@ -46,6 +64,8 @@
     drive={bogey.drive}
     orders={navigation_orders}
     navigation={bogey.navigation} />
+
+  <Firecons {firecons} {weapons} {targets} />
 
 </div>
 <style>
