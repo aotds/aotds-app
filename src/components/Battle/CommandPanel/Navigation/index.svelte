@@ -10,7 +10,6 @@
   export let navigation;
   let orders;
   $: orders = navigation.course.orders;
-  $: console.log({ orders });
 
   let thrust_used;
   $: thrust_used = fp.getOr(0, 'course.thrust_used', navigation);
@@ -33,9 +32,6 @@
   const set_navigation_order = (payload) => {
     dispatch('set_navigation_order', payload);
   };
-
-  $: console.log(navigation);
-
 
 </script>
 

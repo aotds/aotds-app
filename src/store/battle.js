@@ -59,7 +59,73 @@ export default function BattleStore() {
         )
    ;
 
+   const setFireconTarget = ({bogey_id,firecon_id,target_id}) => {
+       store.update( $store => {
+           $store = u.updateIn('bogeys', u.map(
+               u.if(
+                   fp.matches({id: bogey_id}),
+                    u.updateIn('weaponry.firecons',
+                        u.map(u.if(fp.matches({id: firecon_id}),
+                            u({ target_id })
+                        )
+                    )
+               )
+           ) ) )($store);
+           $store = u.updateIn('bogeys', u.map(
+               u.if(
+                   fp.matches({id: bogey_id}),
+                    u.updateIn('orders.firecons',
+                        firecons => {
+                            [
+                            ...fp.reject({firecon_id}, firecons),
+                                {firecon_id, target_id}
+                            ]
+                        }
+                    )
+               )
+           ))($store);
+           return $store;
+       })
+
+   };
+
+   const assignWeaponToFirecon = ({bogey_id,firecon_id,weapon_id}) => {
+       store.update( $store => {
+           console.log("monk",{bogey_id,firecon_id,weapon_id});
+
+           $store = u.updateIn('bogeys', u.map(
+               u.if(
+                   fp.matches({id: bogey_id}),
+                    u.updateIn('weaponry.weapons',
+                        u.map(u.if(fp.matches({id: weapon_id}),
+                            u({ firecon_id })
+                        )
+                    )
+               )
+           ) ) )($store);
+           $store = u.updateIn('bogeys', u.map(
+               u.if(
+                   fp.matches({id: bogey_id}),
+                    u.updateIn('orders.weapons',
+                        weapons =>
+                            [
+                            ...fp.reject({weapon_id}, weapons),
+                                {firecon_id, weapon_id}
+                            ]
+
+                    )
+               )
+           ))($store);
+           return $store;
+       })
+   }
+
+    store.subscribe($store =>
+        console.log($store)
+    );
   return {
+      setFireconTarget,
+      assignWeaponToFirecon,
       select_bogey,
       selected_bogey,
       bogeys,
