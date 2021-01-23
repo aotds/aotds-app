@@ -12,6 +12,7 @@
 
 
   const { set_navigation_order, bogeys } = getContext('battle');
+  const battle = getContext('battle');
 
 
   let orders_sent;
@@ -46,6 +47,20 @@
     })
   ), 'distance' );
 
+  const setFireconTarget = ({detail}) =>
+    battle.setFireconTarget({
+      bogey_id: bogey.id,
+      ...detail
+    });
+
+  const assignWeaponToFirecon = ({detail}) =>
+    battle.assignWeaponToFirecon({
+      bogey_id: bogey.id,
+      weapon_id: parseInt(detail.weapon_id),
+      firecon_id: parseInt(detail.firecon_id),
+    });
+
+
 </script>
 
 <div>
@@ -65,7 +80,10 @@
     orders={navigation_orders}
     navigation={bogey.navigation} />
 
-  <Firecons {firecons} {weapons} {targets} />
+  <Firecons {firecons} {weapons} {targets}
+    on:assignWeaponToFirecon={assignWeaponToFirecon}
+    on:setFireconTarget={setFireconTarget}
+  />
 
 </div>
 <style>

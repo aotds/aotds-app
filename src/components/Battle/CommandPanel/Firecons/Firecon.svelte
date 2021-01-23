@@ -6,6 +6,17 @@
 
   import Targets from './Targets.svelte';
   import Weapon from './Weapon.svelte';
+  import {getContext, createEventDispatcher} from 'svelte';
+
+  const dispatch = createEventDispatcher();
+  const battle  = getContext('battle');
+
+  const setFireconTarget = ({detail: target_id}) => {
+    dispatch('setFireconTarget', {
+      firecon_id, target_id
+    });
+  }
+
 </script>
 
 <div class="firecon" data-firecon-id={firecon_id}>
@@ -14,13 +25,13 @@
       <h2>{firecon_id || 'Standby' }</h2>
       <div class="spacer"><hr /></div>
       {#if firecon_id}
-        <Targets {targets} {target_id} />
+        <Targets {targets} {target_id} on:setFireconTarget={setFireconTarget} />
       {/if}
   </div>
 
   <div class="weapons" data-firecon-id={firecon_id}>
     {#each weapons as weapon (weapon.id)}
-      <Weapon {...weapon} weapon_id={weapon.id}/>
+      <Weapon {...weapon} weapon_id={weapon.id} />
     {/each}
       <div>&nbsp;</div>
   </div>

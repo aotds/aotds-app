@@ -17,7 +17,7 @@ export default async function (node) {
       },
     }) => {
       node.dispatchEvent(
-        new CustomEvent('assign_weapon_to_firecon', {
+        new CustomEvent('assignWeaponToFirecon', {
             detail: {
           weapon_id: source.dataset.weaponId,
           firecon_id: dropzone.dataset.fireconId,
