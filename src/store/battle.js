@@ -1,137 +1,75 @@
 import { writable, derived, get } from "svelte/store";
-import fp from 'lodash/fp';
-import _ from 'lodash';
-import u from '@yanick/updeep';
-import constant from '@yanick/updeep/dist/constant';
+import fp from "lodash/fp";
+import _ from "lodash";
+import u from "@yanick/updeep";
 import { plot_movement } from "@aotds/aotds-battle";
+import dux from "./battle/dux";
+import { compose, applyMiddleware } from "redux";
+
+const composeEnhancers =
+  (typeof window !== "undefined" &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+  compose;
 
 export default function BattleStore() {
-    const store = writable(null);
+  const store = writable(null);
 
-    const selected_bogey = writable(null);
+  const duxStore = dux.createStore({}, (mw) =>
+    composeEnhancers(applyMiddleware(mw))
+  );
 
-    const seed_bogey = () => _.get(get(store), "bogeys.0", null);
+  const selected_bogey = writable(null);
 
-    store.subscribe(($battle) => {
-      const selected = get(selected_bogey);
-      if (_.find(_.get($battle, "bogeys", []), { id: selected })) return;
+  const seed_bogey = () => _.get(get(store), "bogeys.0", null);
 
-      selected_bogey.set(_.get(seed_bogey(), "id", null));
-    });
+  store.subscribe(($battle) => {
+    const selected = get(selected_bogey);
+    if (_.find(_.get($battle, "bogeys", []), { id: selected })) return;
 
-    const bogeys = derived(
-      [store, selected_bogey],
-      ([$battle, $selected_bogey], set) => {
-          _.flow(
-            fp.getOr([], 'bogeys'),
-            u.map(
-                u.if(_.matches({ id: $selected_bogey }), { selected: true })
-            ),
-            u.map(
-                bogey => {
-                    const course = plot_movement(bogey);
-                    return u({
-                        navigation: { course },
-                        orders: { navigation: course.orders }
-                    },bogey)
-                }
-            ),
-              set
-          )($battle);
-      }
-    );
+    selected_bogey.set(_.get(seed_bogey(), "id", null));
+  });
 
-  const select_bogey = selected_bogey.set;
+  const bogeys = derived(
+    [store, selected_bogey],
+    ([$battle, $selected_bogey], set) => {
+      _.flow(
+        fp.getOr([], "bogeys"),
+        u.map(u.if(_.matches({ id: $selected_bogey }), { selected: true })),
+        u.map((bogey) => {
+          const course = plot_movement(bogey);
+          return u(
+            {
+              navigation: { course },
+              orders: { navigation: course.orders },
+            },
+            bogey
+          );
+        }),
+        set
+      )($battle);
+    }
+  );
 
-   const set_navigation_order = (id,{type,value}) =>
-        store.update( $store =>
-            u.updateIn( 'bogeys',
-                u.map( u.if(fp.matches({id}), bogey => {
-                    bogey = u.updateIn(['orders','navigation',type], value, bogey);
-                    const course = plot_movement(bogey);
-                    return u({
-                        navigation: { course },
-                        orders: { navigation: course.orders }, // to restrict the command
-                    },bogey)
-                })),
-                $store)
+  const selectBogey = selected_bogey.set;
 
-        )
-   ;
 
-   const setFireconTarget = ({bogey_id,firecon_id,target_id}) => {
-       store.update( $store => {
-           $store = u.updateIn('bogeys', u.map(
-               u.if(
-                   fp.matches({id: bogey_id}),
-                    u.updateIn('weaponry.firecons',
-                        u.map(u.if(fp.matches({id: firecon_id}),
-                            u({ target_id })
-                        )
-                    )
-               )
-           ) ) )($store);
-           $store = u.updateIn('bogeys', u.map(
-               u.if(
-                   fp.matches({id: bogey_id}),
-                    u.updateIn('orders.firecons',
-                        firecons => {
-                            [
-                            ...fp.reject({firecon_id}, firecons),
-                                {firecon_id, target_id}
-                            ]
-                        }
-                    )
-               )
-           ))($store);
-           return $store;
-       })
+  store.subscribe(($store) => console.log($store));
 
-   };
+  const actions = _.mapValues(duxStore.actions, (fun) => (...args) =>
+    duxStore.dispatch(fun(...args))
+  );
 
-   const assignWeaponToFirecon = ({bogey_id,firecon_id,weapon_id}) => {
-       store.update( $store => {
-           console.log("monk",{bogey_id,firecon_id,weapon_id});
+  duxStore.subscribe(() => {
+    store.set(duxStore.getState());
+  });
 
-           $store = u.updateIn('bogeys', u.map(
-               u.if(
-                   fp.matches({id: bogey_id}),
-                    u.updateIn('weaponry.weapons',
-                        u.map(u.if(fp.matches({id: weapon_id}),
-                            u({ firecon_id })
-                        )
-                    )
-               )
-           ) ) )($store);
-           $store = u.updateIn('bogeys', u.map(
-               u.if(
-                   fp.matches({id: bogey_id}),
-                    u.updateIn('orders.weapons',
-                        weapons =>
-                            [
-                            ...fp.reject({weapon_id}, weapons),
-                                {firecon_id, weapon_id}
-                            ]
-
-                    )
-               )
-           ))($store);
-           return $store;
-       })
-   }
-
-    store.subscribe($store =>
-        console.log($store)
-    );
   return {
-      setFireconTarget,
-      assignWeaponToFirecon,
-      select_bogey,
-      selected_bogey,
-      bogeys,
-      store,
-      set_navigation_order,
-  }
+    selectBogey,
+    selected_bogey,
+    bogeys,
+    store,
+    ...actions,
+  };
 }
 
 // export async function fetch() {

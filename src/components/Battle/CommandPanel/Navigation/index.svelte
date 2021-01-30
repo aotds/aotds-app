@@ -51,7 +51,8 @@
       max={get_max(type)}
       value={orders[type]||0}
       label={type}
-      on:input={({target: {value}}) => set_navigation_order({type,value})}/>
+      on:input={({target: {value}}) =>
+      set_navigation_order({[type]:parseInt(value)})}/>
   {/each}
 
 </fieldset>

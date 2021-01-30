@@ -11,7 +11,7 @@
   export let bogey = null;
 
 
-  const { set_navigation_order, bogeys } = getContext('battle');
+  const { setNavigationOrder, bogeys } = getContext('battle');
   const battle = getContext('battle');
 
 
@@ -33,7 +33,7 @@
   $: weapons  = _.get(bogey,'weaponry.weapons', []);
 
   const handle_navigation_order = ({detail}) => {
-    set_navigation_order(bogey.id,detail)
+    setNavigationOrder({bogey_id: bogey.id,order: detail})
   };
 
   let targets = [];

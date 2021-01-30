@@ -7,7 +7,8 @@
   import sample from './sample_game';
 
   const battle = BattleStore();
-  battle.store.set(sample);
+
+  battle.initBattle(sample);
 
   setContext('battle',battle);
 
