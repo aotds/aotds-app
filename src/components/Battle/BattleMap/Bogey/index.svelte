@@ -13,7 +13,7 @@
 
   export let selected = false;
 
-  const select = () => battle.select_bogey(id);
+  const select = () => battle.selectBogey(id);
 
 </script>
 

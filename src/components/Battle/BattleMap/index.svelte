@@ -6,7 +6,7 @@
     <BogeyCourse {bogey} />
   {/each}
   {#each bogeys as bogey (bogey.id)}
-    <Bogey {...bogey} {radar} on:select={select_bogey(bogey.id)} />
+    <Bogey {...bogey} {radar} on:select={selectBogey(bogey.id)} />
   {/each}
 </svg>
 
@@ -23,10 +23,10 @@
 
   const dispatch = createEventDispatcher();
 
-  const select_bogey = (bogey_id) => () => {
+  const selectBogey = (bogey_id) => () => {
     if(radar) return;
 
-    dispatch('select_bogey',bogey_id);
+    dispatch('selectBogey',bogey_id);
   }
 
   let map_area = {
