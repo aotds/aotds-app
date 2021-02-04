@@ -57,6 +57,13 @@
 </script>
 
 <svg viewBox="{viewbox}" class:radar class:main_map="{!radar}">
+  <defs>
+    <!-- TODO actually use the ship shape -->
+    <mask id="shipZone">
+      <circle x="0" y="0" r="10"></circle>
+    </mask>
+  </defs>
+
   {#each bogeys as bogey (bogey.id)}
     <BogeyCourse bogey="{bogey}" />
   {/each}

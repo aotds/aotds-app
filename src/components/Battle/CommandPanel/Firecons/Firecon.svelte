@@ -35,7 +35,12 @@
 
   <div class="weapons" data-firecon-id="{firecon_id}">
     {#each weapons as weapon (weapon.id)}
-      <Weapon {...weapon} weapon_id="{weapon.id}" bogey_id="{bogey_id}" />
+      <Weapon
+        on:show_weapon_arcs
+        {...weapon}
+        weapon_id="{weapon.id}"
+        bogey_id="{bogey_id}"
+      />
     {/each}
     <div>&nbsp;</div>
   </div>

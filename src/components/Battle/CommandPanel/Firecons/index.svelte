@@ -20,6 +20,7 @@
 
   {#each firecons as firecon (firecon.id)}
     <Firecon
+      on:show_weapon_arcs
       on:setFireconTarget
       bogey_id="{bogey_id}"
       firecon_id="{firecon.id}"
@@ -29,7 +30,7 @@
     />
   {/each}
 
-  <Firecon weapons="{weapons_for(undefined)}" bogey_id="{bogey_id}" />
+  <Firecon weapons="{weapons_for(undefined)}" on:show_weapon_arcs />
 </fieldset>
 
 <style>
