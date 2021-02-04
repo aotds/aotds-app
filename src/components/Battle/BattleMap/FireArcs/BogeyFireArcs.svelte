@@ -5,8 +5,6 @@
   export let coords = [0, 0];
   export let weapons = [];
   export let heading = 0;
-
-  $: console.log(weapons);
 </script>
 
 <Position coords="{coords}" heading="{heading}">

@@ -5,8 +5,8 @@
 
 {#each bogeys as bogey (bogey.id)}
   <BogeyFireArcs
-    coords="{bogey.navigation.coords}"
-    heading="{bogey.navigation.heading}"
+    coords="{bogey.navigation.course.coords}"
+    heading="{bogey.navigation.course.heading}"
     weapons="{bogey.weaponry.weapons}"
   />
 {/each}

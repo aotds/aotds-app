@@ -82,7 +82,7 @@ dux.addMutation(
 );
 
 dux.addMutation(
-  action("showWeaponArcs"),
+  action("show_weapon_arcs"),
   ({ bogey_id, weapon_id, show_arcs }) =>
     u({
       bogeys: u.mapWhen(

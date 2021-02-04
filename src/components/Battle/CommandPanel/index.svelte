@@ -63,18 +63,10 @@
       firecon_id: parseInt(detail.firecon_id),
     });
 
-  const showWeaponArcs = ({ detail: weapon_id }) =>
-    false &&
-    battle.showWeaponArcs({
+  const show_weapon_arcs = ({ detail }) =>
+    battle.show_weapon_arcs({
       bogey_id: bogey.id,
-      weapon_id,
-    });
-
-  const hideWeaponArcs = ({ detail: weaponId }) =>
-    false &&
-    battle.hideWeaponArcs({
-      bogeyId: bogey.id,
-      weaponId,
+      ...detail,
     });
 </script>
 
@@ -102,6 +94,7 @@
     weapons="{weapons}"
     targets="{targets}"
     bogey_id="{bogey_id}"
+    on:show_weapon_arcs="{show_weapon_arcs}"
     on:assignWeaponToFirecon="{assignWeaponToFirecon}"
     on:setFireconTarget="{setFireconTarget}"
   />

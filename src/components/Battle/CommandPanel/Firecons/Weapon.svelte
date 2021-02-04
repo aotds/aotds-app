@@ -6,7 +6,6 @@
   export let weapon_type;
   export let weapon_class;
   export let weapon_id;
-  export let bogey_id;
 
   let Icon;
 
@@ -14,23 +13,11 @@
     Icon = (await import("svelte-awesome")).default;
   });
 
-  const { showWeaponArcs } = getContext("battle");
-
   const dispatch = createEventDispatcher();
 
-  const enter = () => {
-    showWeaponArcs({
-      show_arcs: true,
-      bogey_id,
-      weapon_id,
-    });
-    console.log("yeah?");
-  };
-
-  const leave = () =>
-    showWeaponArcs({
-      show_arcs: false,
-      bogey_id,
+  const show_weapon_arcs = (show_arcs) => () =>
+    dispatch("show_weapon_arcs", {
+      show_arcs,
       weapon_id,
     });
 </script>
@@ -38,8 +25,8 @@
 <div
   class="weapon"
   data-weapon-id="{weapon_id}"
-  on:mouseenter="{enter}"
-  on:mouseleave="{leave}"
+  on:mouseenter="{show_weapon_arcs(true)}"
+  on:mouseleave="{show_weapon_arcs(false)}"
 >
   <svelte:component this="{Icon}" data="{bars}" flip="vertical" />
   <span> {weapon_type} {weapon_class}</span>

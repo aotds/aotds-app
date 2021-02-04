@@ -11,7 +11,14 @@
   $: bogeys = [
     {
       id: 1,
-      navigation: { coords: [0, 0], heading },
+      navigation: {
+        coords: [0, 0],
+        heading,
+        course: {
+          coords: [0, 0],
+          heading,
+        },
+      },
       weaponry: {
         weapons: [
           {
@@ -26,7 +33,14 @@
     },
     {
       id: 2,
-      navigation: { coords: [12, 0], heading: 0 },
+      navigation: {
+        coords: [12, 0],
+        heading: 0,
+        course: {
+          coords: [12, 0],
+          heading: 0,
+        },
+      },
       weaponry: {
         weapons: [],
       },
