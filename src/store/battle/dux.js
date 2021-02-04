@@ -81,4 +81,19 @@ dux.addMutation(
     })
 );
 
+dux.addMutation(
+  action("showWeaponArcs"),
+  ({ bogey_id, weapon_id, show_arcs }) =>
+    u({
+      bogeys: u.mapWhen(
+        { id: bogey_id },
+        {
+          weaponry: {
+            weapons: u.mapWhen({ id: weapon_id }, { show_arcs }),
+          },
+        }
+      ),
+    })
+);
+
 export default dux.asDux;
