@@ -1,5 +1,6 @@
 <script>
   import { getContext } from "svelte";
+  import groupBy from "lodash/groupBy";
 
   export let firecons = [];
   export let weapons = [];
@@ -9,28 +10,43 @@
   import Firecon from "./Firecon.svelte";
   import fp from "lodash/fp";
 
-  import dragndrop from "./dragndrop";
-
   const weapons_for = (id) =>
     weapons.filter(({ firecon_id }) => firecon_id === id);
+
+  let firecon_weapons = {};
+  $: {
+    firecon_weapons = Object.fromEntries(
+      Array.from({ length: firecons.length + 1 }, (x, i) => [i, []])
+    );
+
+    weapons.forEach((w) => {
+      firecon_weapons[w.firecon_id || 0].push(w);
+    });
+  }
 </script>
 
-<fieldset use:dragndrop on:assignWeaponToFirecon>
+<fieldset>
   <legend>Firecons</legend>
 
   {#each firecons as firecon (firecon.id)}
     <Firecon
+      on:assignWeaponToFirecon
       on:show_weapon_arcs
       on:setFireconTarget
-      bogey_id="{bogey_id}"
-      firecon_id="{firecon.id}"
-      targets="{targets}"
-      target_id="{firecon.target_id}"
-      weapons="{weapons_for(firecon.id)}"
+      {bogey_id}
+      firecon_id={firecon.id}
+      {targets}
+      target_id={firecon.target_id}
+      weapons={firecon_weapons[firecon.id] || []}
     />
   {/each}
 
-  <Firecon weapons="{weapons_for(undefined)}" on:show_weapon_arcs />
+  <Firecon
+    weapons={firecon_weapons[0] || []}
+    firecon_id={0}
+    on:assignWeaponToFirecon
+    on:show_weapon_arcs
+  />
 </fieldset>
 
 <style>
