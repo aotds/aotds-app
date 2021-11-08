@@ -1,0 +1,22 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+    DIFF: ''
+    GREETING: Hello, World!
+    CHANGED:
+        sh: git diff-ls {{.BASE}}
+    PRETTIER_TARGET: '{{if eq .DIFF ""}}.{{else}}{{.CHANGED | catLines}}{{end}}'
+
+tasks:
+    default:
+        cmds:
+            - echo "{{.GREETING}}"
+        silent: true
+
+    prettier:
+        vars:
+            PRETTIER_ARG: '{{if eq .FIX ""}}--check{{else}}--write{{end}}'
+        cmds:
+            - prettier {{.PRETTIER_ARG}} {{.PRETTIER_TARGET}}

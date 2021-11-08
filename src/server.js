@@ -9,22 +9,22 @@ const dev = NODE_ENV === 'development';
 
 const app = express();
 
-app.use(rest_api({
-    pouch_root: './data',
-    prefix: '/api',
-})
-)
+app.use(
+	rest_api({
+		pouch_root: './data',
+		prefix: '/api',
+	}),
+);
 
 const sapper_app = express();
 sapper_app.use(
-    compression({ threshold: 0 }),
-    sirv('public', { dev }),
-    sapper.middleware()
+	compression({ threshold: 0 }),
+	sirv('public', { dev }),
+	sapper.middleware(),
 );
 
-app.use( sapper_app );
+app.use(sapper_app);
 
-
-app.listen(PORT, err => {
-		if (err) console.log('error', err);
-	});
+app.listen(PORT, (err) => {
+	if (err) console.log('error', err);
+});
