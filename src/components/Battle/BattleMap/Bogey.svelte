@@ -1,8 +1,16 @@
 <script>
-  export let navigation = {};
+
+    /** @type {[number,number]} */
+  export let coords = [0,0];
+
+  export let heading = 0;
+
+  export let selected = false;
+
+  /** @type {string} */
   export let id;
 
-  import Position from './Position.svelte';
+  import Position from './Bogey/Position.svelte';
   import { createEventDispatcher, getContext } from 'svelte';
 
   const battle = getContext('battle');
@@ -11,16 +19,13 @@
 
   const dispatch = createEventDispatcher();
 
-  export let selected = false;
 
-  const select = () => battle.selectBogey(id);
+  let select;
+  $: select = () => dispatch('selectBogey', id);
 
 </script>
 
 <style>
-div {
-  background-color: red;
-}
   .bogey {
     fill: white;
   }
@@ -29,7 +34,7 @@ div {
   }
 </style>
 
-<Position {...navigation}>
+<Position {coords} {heading}>
 <use
   on:click={select}
   class="bogey"

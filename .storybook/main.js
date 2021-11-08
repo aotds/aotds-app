@@ -1,7 +1,9 @@
 module.exports = {
+    staticDirs: [ '../static' ],
   "stories": [
 //    "../src/**/*.stories.mdx",
-    "../src/**/*.stories.svelte"
+    "../src/**/*.stories.svelte",
+    "../src/**/stories.svelte"
   ],
   "addons": [
     "@storybook/addon-links",
