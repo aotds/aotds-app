@@ -1,93 +1,90 @@
 meter {
-  /* Reset the default appearance */
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+	/* Reset the default appearance */
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
 
-  height: 1em;
+	height: 1em;
 
-  /* For Firefox */
-  background: #EEE;
-  box-shadow: 0 2px 3px rgba(0,0,0,0.2) inset;
-  border-radius: 3px;
+	/* For Firefox */
+	background: #eee;
+	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2) inset;
+	border-radius: 3px;
 }
 
 /* WebKit */
 meter::-webkit-meter-bar {
-  background: #EEE;
-  box-shadow: 0 2px 3px rgba(0,0,0,0.2) inset;
-  border-radius: 3px;
+	background: #eee;
+	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2) inset;
+	border-radius: 3px;
 }
 
 meter::-webkit-meter-optimum-value,
 meter::-webkit-meter-suboptimum-value,
 meter::-webkit-meter-even-less-good-value {
-  border-radius: 3px;
+	border-radius: 3px;
 }
 
 meter::-webkit-meter-optimum-value {
-  background: #86CC00;
+	background: #86cc00;
 }
 
 meter::-webkit-meter-suboptimum-value {
-  background: #FFDB1A;
+	background: #ffdb1a;
 }
 
-meter::-webkit-meter-even-less-good-value  {
-  background: #CC4600;
+meter::-webkit-meter-even-less-good-value {
+	background: #cc4600;
 }
-
 
 /* Firefox */
 meter::-moz-meter-bar {
-  border-radius: 3px;
+	border-radius: 3px;
 }
 
 meter:-moz-meter-optimum::-moz-meter-bar {
-  background: #86CC00;
+	background: #86cc00;
 }
 
 meter:-moz-meter-sub-optimum::-moz-meter-bar {
-  background: #FFDB1A;
+	background: #ffdb1a;
 }
 
 meter:-moz-meter-sub-sub-optimum::-moz-meter-bar {
-  background: #CC4600;
+	background: #cc4600;
 }
 
 @font-face {
-    font-family: 'SciFly';
-    src: url('/fonts/SciFly-Sans.ttf')
-  }
+	font-family: 'SciFly';
+	src: url('/fonts/SciFly-Sans.ttf');
+}
 
-  @font-face {
-    font-family: 'Roboto';
-    src: url('/fonts/roboto/Roboto-Medium.ttf');
-    font-weight: normal;
-    font-style: normal;
-  }
+@font-face {
+	font-family: 'Roboto';
+	src: url('/fonts/roboto/Roboto-Medium.ttf');
+	font-weight: normal;
+	font-style: normal;
+}
 
-  @font-face {
-    font-family: 'Roboto';
-    src: url('/fonts/roboto/Roboto-Bold.ttf');
-    font-weight: bold;
-    font-style: normal;
-  }
+@font-face {
+	font-family: 'Roboto';
+	src: url('/fonts/roboto/Roboto-Bold.ttf');
+	font-weight: bold;
+	font-style: normal;
+}
 
-  @font-face {
-    font-family: 'Roboto';
-    src: url('/fonts/roboto/Roboto-Light.ttf');
-    font-weight: lighter;
-    font-style: normal;
-  }
+@font-face {
+	font-family: 'Roboto';
+	src: url('/fonts/roboto/Roboto-Light.ttf');
+	font-weight: lighter;
+	font-style: normal;
+}
 
 :root {
-
-    --font-main: Roboto;
-    --font-accent: SciFly;
-
+	--font-main: Roboto;
+	--font-accent: SciFly;
 }
 
 body {
-    font-family: var(--font-main);
+	font-family: var(--font-main);
 }

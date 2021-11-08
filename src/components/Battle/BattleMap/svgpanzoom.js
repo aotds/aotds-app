@@ -1,12 +1,13 @@
 import svgPanZoom from 'svg-pan-zoom';
 
-export default function(node) {
+export default function (node) {
+	let pan = svgPanZoom(node, {
+		zoomEnabled: true,
+		controlIconsEnabled: true,
+		contains: true,
+	});
 
-    let pan = svgPanZoom(node, {
-          zoomEnabled: true,
-          controlIconsEnabled: true,
-          contains: true,
-    });
-
-    return () => { pan.destroy() };
+	return () => {
+		pan.destroy();
+	};
 }

@@ -1,16 +1,16 @@
 .mainMap {
-  background-image: url('/starbackground.jpg');
-  background-repeat: repeat;
-  width: 100%;
-  height: 100%;
+	background-image: url('/starbackground.jpg');
+	background-repeat: repeat;
+	width: 100%;
+	height: 100%;
 }
 
 .radar {
-  background-image: none;
-  background-color: black;
+	background-image: none;
+	background-color: black;
 }
 
 .zonebox {
-  stroke: red;
-  stroke-width: 3px;
+	stroke: red;
+	stroke-width: 3px;
 }
