@@ -4,7 +4,7 @@ const arcToAngleRange = {
 	F: [-1, 1],
 	FS: [1, 3],
 	AS: [3, 5],
-	A: [5, 6],
+	A: [5, 7],
 	AP: [-5, -3],
 	FP: [-3, -1],
 };
@@ -14,8 +14,8 @@ export function plotArc(arc, radius) {
 	const start = polarToCartesian(endAngle, radius);
 	const end = polarToCartesian(startAngle, radius);
 
-	const zs = polarToCartesian(endAngle, map_scale(1));
-	const ze = polarToCartesian(startAngle, map_scale(1));
+	const zs = polarToCartesian(endAngle, 0);
+	const ze = polarToCartesian(startAngle, 0);
 
 	const arcSweep = endAngle - startAngle <= 6 ? '0' : '1';
 
@@ -42,7 +42,7 @@ export function plotArc(arc, radius) {
 		map_scale(1),
 		0,
 		arcSweep,
-		0,
+		1,
 		zs.x,
 		zs.y,
 	].join(' ');

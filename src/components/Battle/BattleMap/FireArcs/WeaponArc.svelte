@@ -1,20 +1,25 @@
 <script>
-  import { map_scale } from "../utils";
-  import { polarToCartesian, plotArc } from "./utils";
+	import { map_scale } from '../utils';
+	import { plotArc } from './utils';
 
-  export let weaponClass = 1;
-  export let arc = "F";
+	export let weaponClass;
+	export let arc;
 
-  let d;
-  $: d = plotArc(arc, map_scale(12 * weaponClass));
+	let range = [];
+	$: range = Array.from({ length: weaponClass }, (_, i) =>
+		plotArc(arc, map_scale(12 * (i + 1))),
+	);
+	range.reverse();
 </script>
 
-<path d="{d}"></path>
+{#each range as d (d)}
+	<path {d} />
+{/each}
 
 <style>
-  path {
-    fill: red;
-    stroke: red;
-    opacity: 0.4;
-  }
+	path {
+		fill: red;
+		stroke: none;
+		opacity: 0.4;
+	}
 </style>
