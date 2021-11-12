@@ -6,3 +6,4 @@ data
 package-lock.json
 .routify
 .svelte
+storybook-static/
