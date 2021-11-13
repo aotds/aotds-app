@@ -1,7 +1,7 @@
 import { writable, derived, get } from 'svelte/store';
 import fp from 'lodash/fp';
 import _ from 'lodash';
-import u from '@yanick/updeep';
+import u from 'updeep';
 import { plot_movement } from '@aotds/aotds-battle';
 import dux from './battle/dux';
 import { compose, applyMiddleware } from 'redux';

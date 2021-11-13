@@ -1,5 +1,8 @@
+export default {};
+
+/*
 import Updux from 'updux';
-import u from '@yanick/updeep';
+import u from 'updeep';
 import { action as actionTS, payload } from 'ts-action';
 import { plot_movement } from '@aotds/aotds-battle';
 
@@ -97,3 +100,4 @@ dux.addMutation(
 );
 
 export default dux.asDux;
+*/

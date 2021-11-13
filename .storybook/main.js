@@ -7,15 +7,15 @@ module.exports = {
 	],
 	addons: [
 		'@storybook/addon-links',
+		'@storybook/addon-docs',
 		'@storybook/addon-essentials',
 		'@storybook/addon-knobs',
-		'@storybook/addon-docs',
 		'@storybook/addon-svelte-csf',
 	],
 	framework: '@storybook/svelte',
 	core: {
 		// seems to be b0rked
-		//    "builder": "storybook-builder-vite"
+		//"builder": "storybook-builder-vite"
 	},
 	svelteOptions: {
 		preprocess: import('../svelte.config.js').preprocess,
