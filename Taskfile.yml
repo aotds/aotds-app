@@ -20,3 +20,5 @@ tasks:
             PRETTIER_ARG: '{{if eq .FIX ""}}--check{{else}}--write{{end}}'
         cmds:
             - prettier {{.PRETTIER_ARG}} {{.PRETTIER_TARGET}}
+
+    sync-story: rsync -av ./storybook-static/ 192.168.0.100:/home/aotds/aotds-story
