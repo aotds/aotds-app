@@ -18,7 +18,11 @@
 	<svg viewBox="-200 -200 400 400">
 		<Bogey
 			{...args}
-			coords={[args.x, args.y]}
+			bogey={{
+				navigation: {
+					coords: [args.x, args.y],
+				},
+			}}
 			on:selectBogey={args.select}
 		/>
 	</svg>

@@ -49,7 +49,7 @@
 	:global(.radar) {
 		border: 1px solid white;
 		position: absolute;
-		bottom: 5px;
+		top: 5px;
 		left: 5px;
 		width: 20%;
 		height: 30%;
