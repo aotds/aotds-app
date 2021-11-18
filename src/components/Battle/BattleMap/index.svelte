@@ -4,7 +4,7 @@
 
 	import FireArcs from './FireArcs/index.svelte';
 	import Bogey from './Bogey.svelte';
-	import BogeyCourse from './BogeyCourse/index.svelte';
+	import BogeyCourse from './BogeyCourse.svelte';
 	import { coords2map } from './utils';
 	import fp from 'lodash/fp';
 	import { createEventDispatcher } from 'svelte';
@@ -75,7 +75,7 @@
 	<FireArcs {bogeys} />
 
 	{#each bogeys as bogey (bogey.id)}
-		<Bogey {...bogey} {radar} on:select={selectBogey(bogey.id)} />
+		<Bogey {bogey} {radar} on:select={selectBogey(bogey.id)} />
 	{/each}
 </svg>
 

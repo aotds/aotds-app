@@ -1,4 +1,7 @@
 <script>
+	import _ from 'lodash';
+	import u from 'updeep';
+
 	import Bogey from './Bogey.svelte';
 	import { coords2map } from './utils';
 	import { plotMovement } from '@aotds/aotds-battle';
@@ -15,29 +18,21 @@
 		);
 	}
 
-	export let thrust = 0;
-	export let turn = 0;
-	export let bank = 0;
+	export let bogey = {};
 
-	/** position of the ship */
-	export let coords = [0, 0];
-	export let heading = 0;
-	export let velocity = 0;
-	export let drive = 0;
+	console.log(bogey);
+	$: course = plotMovement(bogey);
 
-	$: course = plotMovement({
-		navigation: { coords, heading, velocity },
-		orders: { navigation: { turn, thrust, bank } },
-		drive: { current: drive },
-	});
-
-	let path = [];
 	$: path = path_for(course.trajectory);
+
+	$: console.log(course);
+
+	$: courseBogey = u({ navigation: course }, bogey);
 </script>
 
 <g class="course">
 	<path d={path} />
-	<Bogey {...course} />
+	<Bogey bogey={courseBogey} />
 </g>
 
 <style>
